@@ -14,5 +14,11 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+// routers import
+import healthcheckRouter from "./routers/healthcheck.router.js";
+
+// routers declaration
+app.use("/api/v1/users/healthcheck",healthcheckRouter)
+
 
 export { app };
