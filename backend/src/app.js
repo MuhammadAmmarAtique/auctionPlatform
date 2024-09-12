@@ -16,9 +16,11 @@ app.use(
 );
 // routers import
 import healthcheckRouter from "./routers/healthcheck.router.js";
+import userRouter from "./routers/user.router.js";
 
 // routers declaration
-app.use("/api/v1/users/healthcheck",healthcheckRouter)
+app.use("/api/v1/healthcheck",healthcheckRouter)
+app.use("/api/v1/users",userRouter)
 
 
 export { app };
