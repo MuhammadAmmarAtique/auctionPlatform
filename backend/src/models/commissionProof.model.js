@@ -27,6 +27,8 @@ const paymentProofSchema = new mongoose.Schema({
   },
   amount: Number,
   comment: String,
-});
+},  
+{ timestamps: true }
+);
 
 export const PaymentProof = mongoose.model("PaymentProof", paymentProofSchema);

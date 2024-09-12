@@ -7,6 +7,8 @@ const commissionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+},
+{ timestamps: true }
+);
 
 export const Commission = mongoose.model("Commission", commissionSchema);

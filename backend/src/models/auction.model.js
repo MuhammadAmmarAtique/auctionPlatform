@@ -50,6 +50,8 @@ const auctionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+},
+{ timestamps: true }
+);
 
 export const Auction = mongoose.model("Auction", auctionSchema);

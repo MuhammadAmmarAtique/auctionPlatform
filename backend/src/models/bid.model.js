@@ -16,6 +16,8 @@ const bidSchema = new mongoose.Schema({
     ref: "Auction",
     required: true,
   },
-});
+},
+{ timestamps: true }
+);
 
 export const Bid = mongoose.model("Bid", bidSchema);
