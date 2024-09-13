@@ -30,11 +30,18 @@ const userSchema = new mongoose.Schema(
     address: {
       type: String,
       trim: true,
+      required: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       trim: true,
       minLength: [11, "minimum length of phone number must be eleven!"],
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["Auctioneer", "Bidder", "Super Admin"],
+      required: true,
     },
     profileImage: {
       publicId: {
@@ -47,13 +54,13 @@ const userSchema = new mongoose.Schema(
       },
     },
     paymentMethods: {
-      bankTransfer: {
+      bankTransfer: { 
         bankAccountNumber: String,
         bankAccountName: String,
         bankName: String,
       },
       easypaisa: {
-        easypaisaAccountNumber: Number,
+        easypaisaAccountNumber: String,
       },
       paypal: {
         paypalEmail: String,
