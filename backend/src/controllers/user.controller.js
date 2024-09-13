@@ -4,6 +4,26 @@ import { ApiError } from "../utlis/ApiError.js";
 import { uploadOnCloudinary } from "../utlis/cloudinary.js";
 import { User } from "../models/user.model.js";
 
+// generateAccessAndRefreshToken method will be used for registration,login & refreshing access token.
+const generateAccessandRefreshToken = async (userId) => {
+  const user = await User.findById(userId);
+  const AccessToken = await user.generateAccessToken();
+  const RefreshToken = await user.generateRefreshToken();
+  user.refreshToken = RefreshToken;
+  await user.save({ validateBeforeSave: false });
+
+  return {
+    AccessToken,
+    RefreshToken,
+  };
+};
+
+//cookies options to be used in registration,login,logout,refreshAcessToken & deleteUser.
+const options = {
+  httpOnly: true,
+  secure: true,
+};
+
 const registerUser = asyncHandler(async (req, res) => {
   // 1) take username,email, password,address, phone number,role (all required fields + add checks so user must give them)
   // 2) using username and email check if user already exists or not
@@ -11,7 +31,8 @@ const registerUser = asyncHandler(async (req, res) => {
   // 4) upload profile image in cloudinary
   // 5) add a check for auctioneer(user) so that it must give all 3 payments methods.
   // 6) create user
-  // 7) return response
+  // 7) create refresh & access token for user
+  // 8) return response with cookies
 
   // 1)
   const {
@@ -145,8 +166,15 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // 7)
+  const { AccessToken, RefreshToken } = await generateAccessandRefreshToken(
+    user._id
+  );
+
+  // 8)
   res
     .status(200)
+    .cookie("acessToken", AccessToken, options)
+    .cookie("refreshToken", RefreshToken, options)
     .json(new ApiResponse(200, "User registered Successfully!", user));
 });
 
