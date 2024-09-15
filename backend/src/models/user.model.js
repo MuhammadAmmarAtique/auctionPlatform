@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    moneyWon: {
+    moneySpent: {
       type: Number,
       default: 0,
     },
