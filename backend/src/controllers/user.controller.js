@@ -252,4 +252,15 @@ const refreshAcessToken = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Successfully refreshed access cookie"));
 });
 
-export { registerUser, loginUser, logoutUser, getUser, refreshAcessToken };
+const deleteUser = asyncHandler(async (req,res) => {
+ await User.findByIdAndDelete(req.user._id)
+ 
+ res
+ .status(200)
+ .clearCookie("accessToken", options)
+ .clearCookie("refreshToken", options)
+ .json(new ApiResponse(200, "User deleted Successfully!"));
+
+})
+
+export { registerUser, loginUser, logoutUser, getUser, refreshAcessToken, deleteUser };
