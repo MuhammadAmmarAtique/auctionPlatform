@@ -178,4 +178,29 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "User registered Successfully!", user));
 });
 
-export { registerUser };
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, "User not found! or Incorrect Email!");
+  }
+
+  const correctPassword = await user.verifyPassword(password);
+  console.log("correctPassword: ", correctPassword);
+  if (correctPassword === false) {
+    throw new ApiError(400, "Incorrect Password!");
+  }
+
+  const { AccessToken, RefreshToken } = await generateAccessandRefreshToken(
+    user._id
+  );
+
+  res
+    .status(200)
+    .cookie("acessToken", AccessToken, options)
+    .cookie("refreshToken", RefreshToken, options)
+    .json(new ApiResponse(200, "User login successful!", user));
+});
+
+export { registerUser, loginUser };
