@@ -183,7 +183,10 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email?.trim() || !password?.trim()) {
-    throw new ApiError(400, "Both email & password fields are required for login!");
+    throw new ApiError(
+      400,
+      "Both email & password fields are required for login!"
+    );
   }
 
   const user = await User.findOne({ email });
@@ -212,7 +215,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     user._id,
     {
-      $unset: {refreshToken: ""}
+      $unset: { refreshToken: "" },
     },
     { new: true }
   );
@@ -223,9 +226,11 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "User logged out Successfully", updatedUser));
 });
 
-const getUser = asyncHandler(async (req,res) => {
-  res.status(200).json(new ApiResponse(200, "Successfully fetch User!", req.user))
-})
+const getUser = asyncHandler(async (req, res) => {
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Successfully fetch User!", req.user));
+});
 
 const refreshAcessToken = asyncHandler(async (req, res) => {
   const userRefreshToken = req.cookies.refreshToken;
@@ -253,14 +258,43 @@ const refreshAcessToken = asyncHandler(async (req, res) => {
 });
 
 const deleteUser = asyncHandler(async (req,res) => {
- await User.findByIdAndDelete(req.user._id)
+  await User.findByIdAndDelete(req.user._id)
+  
+  res
+  .status(200)
+  .clearCookie("accessToken", options)
+  .clearCookie("refreshToken", options)
+  .json(new ApiResponse(200, "User deleted Successfully!"));
  
- res
- .status(200)
- .clearCookie("accessToken", options)
- .clearCookie("refreshToken", options)
- .json(new ApiResponse(200, "User deleted Successfully!"));
+ })
 
-})
+const fetchLeaderboard = asyncHandler(async (req, res) => {
+  const users = await User.find({ moneySpent: { $gt: 0 } });
+  const leaders = users.sort((a, b) => b.moneySpent - a.moneySpent);
 
-export { registerUser, loginUser, logoutUser, getUser, refreshAcessToken, deleteUser };
+  if (leaders.length === 0) {
+    res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          "No bidder has spend money on any auction!",
+          leaders
+        )
+      );
+  }
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Fetched leader board Successfully!", leaders));
+});
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUser,
+  refreshAcessToken,
+  deleteUser,
+  fetchLeaderboard,
+};
