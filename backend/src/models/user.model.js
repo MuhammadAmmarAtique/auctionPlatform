@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
       minLength: [8, "minimum length of password must be eight!"],
-      select: false,
     },
     address: {
       type: String,
@@ -92,6 +91,9 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.verifyPassword = async function (userEntereredPassword) {
+  console.log(this);
+  console.log(this.password);
+  
   const response = await bcrypt.compare(userEntereredPassword, this.password);
   return response;
 };
