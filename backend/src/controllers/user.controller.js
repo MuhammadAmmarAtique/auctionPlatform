@@ -181,15 +181,18 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email?.trim() || !password?.trim()) {
+    throw new ApiError(400, "Both email & password fields are required for login!");
+  }
+
   const user = await User.findOne({ email });
   if (!user) {
     throw new ApiError(404, "User not found! or Incorrect Email!");
   }
 
   const correctPassword = await user.verifyPassword(password);
-  console.log("correctPassword: ", correctPassword);
   if (correctPassword === false) {
-    throw new ApiError(400, "Incorrect Password!");
+    throw new ApiError(400, "Incorrect Password! Enter Again!");
   }
 
   const { AccessToken, RefreshToken } = await generateAccessandRefreshToken(
