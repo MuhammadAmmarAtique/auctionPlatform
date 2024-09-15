@@ -173,7 +173,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // 8)
   res
     .status(200)
-    .cookie("acessToken", AccessToken, options)
+    .cookie("accessToken", AccessToken, options)
     .cookie("refreshToken", RefreshToken, options)
     .json(new ApiResponse(200, "User registered Successfully!", user));
 });
@@ -201,9 +201,25 @@ const loginUser = asyncHandler(async (req, res) => {
 
   res
     .status(200)
-    .cookie("acessToken", AccessToken, options)
+    .cookie("accessToken", AccessToken, options)
     .cookie("refreshToken", RefreshToken, options)
     .json(new ApiResponse(200, "User login successful!", user));
 });
 
-export { registerUser, loginUser };
+const logoutUser = asyncHandler(async (req, res) => {
+  const user = req.user;
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    {
+      $unset: "refreshToken",
+    },
+    { new: true }
+  );
+  res
+    .status(200)
+    .clearCookie(accessToken, options)
+    .clearCookie(refreshToken, options)
+    .json(new ApiResponse(200, "User logged out Successfully", updatedUser));
+});
+
+export { registerUser, loginUser, logoutUser };
