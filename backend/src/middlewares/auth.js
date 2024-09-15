@@ -4,21 +4,21 @@ import { User } from "../models/user.model.js";
 
 const isAuthenticated = async (req, res, next) => {
   try {
-    const token = req?.cookies.accessToken;
+    const token = req?.cookies?.accessToken;
     if (!token) {
-      throw new ApiError(401, "unAuthorized request");
+      throw new ApiError(401, "unauthorized request");
     }
 
     let decodedInfo = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    if (!decodedInfo) {
-      throw new ApiError(401, "Invalid token");
+    const user = await User.findById(decodedInfo._id);
+    if (!user) {
+      throw new ApiError("Invalid access Token", 401);
     }
 
-    const user = await User.findById(decodedInfo._id);
     req.user = user;
     next();
   } catch (error) {
-    throw new ApiError(400, "Invalid Token or Authorization failed", error);
+    throw new ApiError(400, "User Authentication failed!", error);
   }
 };
 
