@@ -3,6 +3,7 @@ import { ApiResponse } from "../utlis/ApiResponse.js";
 import { ApiError } from "../utlis/ApiError.js";
 import { uploadOnCloudinary } from "../utlis/cloudinary.js";
 import { User } from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 
 // generateAccessAndRefreshToken method will be used for registration,login & refreshing access token.
 const generateAccessandRefreshToken = async (userId) => {
@@ -226,4 +227,29 @@ const getUser = asyncHandler(async (req,res) => {
   res.status(200).json(new ApiResponse(200, "Successfully fetch User!", req.user))
 })
 
-export { registerUser, loginUser, logoutUser, getUser };
+const refreshAcessToken = asyncHandler(async (req, res) => {
+  const userRefreshToken = req.cookies.refreshToken;
+  if (!userRefreshToken) {
+    throw new ApiError(400, "unauthorized request");
+  }
+
+  const decodedInfo = jwt.verify(
+    userRefreshToken,
+    process.env.REFRESH_TOKEN_SECRET
+  );
+  if (Object.values(decodedInfo).length === 0) {
+    throw new ApiError(400, "Invalid refresh token");
+  }
+
+  const { AccessToken, RefreshToken } = await generateAccessandRefreshToken(
+    decodedInfo._id
+  );
+
+  res
+    .status(200)
+    .cookie("accessToken", AccessToken, options)
+    .cookie("refreshToken", RefreshToken, options)
+    .json(new ApiResponse(200, "Successfully refreshed access cookie"));
+});
+
+export { registerUser, loginUser, logoutUser, getUser, refreshAcessToken };
