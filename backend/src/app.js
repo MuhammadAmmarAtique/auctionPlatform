@@ -17,10 +17,13 @@ app.use(
 // routers import
 import healthcheckRouter from "./routers/healthcheck.router.js";
 import userRouter from "./routers/user.router.js";
+import auctionRouter from "./routers/auction.router.js";
+
 
 // routers declaration
 app.use("/api/v1/healthcheck",healthcheckRouter)
 app.use("/api/v1/users",userRouter)
+app.use("/api/v1/auctions",auctionRouter)
 
 
 export { app };
