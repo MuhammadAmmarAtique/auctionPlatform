@@ -45,11 +45,7 @@ const auctionSchema = new mongoose.Schema({
   commissionCalculated: {
     type: Boolean,
     default: false,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  }
 },
 { timestamps: true }
 );
