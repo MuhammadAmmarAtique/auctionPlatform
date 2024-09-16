@@ -22,4 +22,15 @@ const isAuthenticated = async (req, res, next) => {
   }
 };
 
-export { isAuthenticated };
+const isAuthorized = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      next(
+        new ApiError(403, `${req.user.role} is not allowed to access this resource!`)
+      );
+    }
+    next();
+  };
+};
+
+export { isAuthenticated, isAuthorized };
