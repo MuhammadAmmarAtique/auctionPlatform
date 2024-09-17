@@ -4,7 +4,7 @@ import {
   addNewAuctionItem,
   getAllAuctionItems,
   getAuctionItemDetails,
-  getuserAuctionItems,
+  getUserAuctionItems,
 } from "../controllers/auction.controller.js";
 
 const router = Router();
@@ -26,7 +26,7 @@ router.get(
   "/getuserAuctionItems",
   isAuthenticated,
   isAuthorized("Auctioneer"),
-  getuserAuctionItems
+  getUserAuctionItems
 );
 
 export default router;

@@ -146,7 +146,7 @@ const getAuctionItemDetails = asyncHandler(async (req, res) => {
     );
 });
 
-const getuserAuctionItems = asyncHandler(async (req, res) => {
+const getUserAuctionItems = asyncHandler(async (req, res) => {
   const userAuctionItems = await Auction.find({
     createdBy: req.user._id,
   });
@@ -173,5 +173,5 @@ export {
   addNewAuctionItem,
   getAllAuctionItems,
   getAuctionItemDetails,
-  getuserAuctionItems,
+  getUserAuctionItems,
 };
