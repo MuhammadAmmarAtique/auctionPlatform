@@ -146,4 +146,32 @@ const getAuctionItemDetails = asyncHandler(async (req, res) => {
     );
 });
 
-export { addNewAuctionItem, getAllAuctionItems, getAuctionItemDetails };
+const getuserAuctionItems = asyncHandler(async (req, res) => {
+  const userAuctionItems = await Auction.find({
+    createdBy: req.user._id,
+  });
+
+  if (userAuctionItems.length === 0) {
+    throw new ApiError(
+      400,
+      "User/Auctioneer doesnot have any auctions listed!"
+    );
+  }
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        "Successfully fetched all user Auction Items",
+        userAuctionItems
+      )
+    );
+});
+
+export {
+  addNewAuctionItem,
+  getAllAuctionItems,
+  getAuctionItemDetails,
+  getuserAuctionItems,
+};

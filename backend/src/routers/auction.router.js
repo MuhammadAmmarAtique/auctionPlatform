@@ -3,7 +3,8 @@ import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 import {
   addNewAuctionItem,
   getAllAuctionItems,
-  getAuctionItemDetails
+  getAuctionItemDetails,
+  getuserAuctionItems,
 } from "../controllers/auction.controller.js";
 
 const router = Router();
@@ -16,6 +17,16 @@ router.post(
 );
 
 router.get("/get-All-Auction-Items", getAllAuctionItems);
-router.get("/getAuctionItemDetails/:auctionItemId",isAuthenticated,  getAuctionItemDetails);
+router.get(
+  "/getAuctionItemDetails/:auctionItemId",
+  isAuthenticated,
+  getAuctionItemDetails
+);
+router.get(
+  "/getuserAuctionItems",
+  isAuthenticated,
+  isAuthorized("Auctioneer"),
+  getuserAuctionItems
+);
 
 export default router;
