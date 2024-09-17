@@ -111,4 +111,16 @@ const addNewAuctionItem = asyncHandler(async (req, res) => {
     );
 });
 
-export { addNewAuctionItem };
+const getAllAuctionItems = asyncHandler(async (req, res) => {
+  const allAuctionItems = await Auction.find();
+  
+  if (allAuctionItems.length === 0) {
+    throw new ApiError(500, "No auction item is present in database");
+  }
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Successfully fetched all Auction Items!"));
+});
+
+export { addNewAuctionItem, getAllAuctionItems };
