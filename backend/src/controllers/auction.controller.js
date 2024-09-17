@@ -169,9 +169,27 @@ const getUserAuctionItems = asyncHandler(async (req, res) => {
     );
 });
 
+const deleteAuctionItem = asyncHandler(async (req, res) => {
+  const { auctionItemId } = req.params;
+  const response = await Auction.findByIdAndDelete({
+    _id: new mongoose.Types.ObjectId(auctionItemId),
+  });
+
+  if (!response) {
+    throw new ApiError(
+      400,
+      "Auction item already deleted or not found in database b/c of wrong auctionId"
+    );
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Successfully deleted User Auction item!"));
+});
+
 export {
   addNewAuctionItem,
   getAllAuctionItems,
   getAuctionItemDetails,
   getUserAuctionItems,
+  deleteAuctionItem,
 };
