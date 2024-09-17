@@ -3,6 +3,7 @@ import { ApiError } from "../utlis/ApiError.js";
 import { ApiResponse } from "../utlis/ApiResponse.js";
 import { Auction } from "../models/auction.model.js";
 import { uploadOnCloudinary } from "../utlis/cloudinary.js";
+import mongoose from "mongoose";
 
 const addNewAuctionItem = asyncHandler(async (req, res) => {
   // 1) take all required text fields + add checks so that user must give them
@@ -113,7 +114,7 @@ const addNewAuctionItem = asyncHandler(async (req, res) => {
 
 const getAllAuctionItems = asyncHandler(async (req, res) => {
   const allAuctionItems = await Auction.find();
-  
+
   if (allAuctionItems.length === 0) {
     throw new ApiError(500, "No auction item is present in database");
   }
@@ -123,4 +124,26 @@ const getAllAuctionItems = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Successfully fetched all Auction Items!"));
 });
 
-export { addNewAuctionItem, getAllAuctionItems };
+const getAuctionItemDetails = asyncHandler(async (req, res) => {
+  const { auctionItemId } = req.params;
+  const auctionItemDetails = await Auction.findById({
+    _id: new mongoose.Types.ObjectId(auctionItemId),
+  });
+
+  if (!auctionItemDetails) {
+    throw new ApiError(500, "No auction itek found in database!");
+  }
+  const bidders = auctionItemDetails.bids.sort((a, b) => b.amount - a.amount);
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        "Successfully fetched auction item details with its bidders in ascending order",
+        { "auctionItemDetails:::": auctionItemDetails, "bidders:::": bidders }
+      )
+    );
+});
+
+export { addNewAuctionItem, getAllAuctionItems, getAuctionItemDetails };
