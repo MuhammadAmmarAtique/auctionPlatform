@@ -9,7 +9,7 @@ const auctionSchema = new mongoose.Schema({
     type: String,
     enum: ["New", "Used"],
   },
-  currentBid: { type: Number, default: 0 },
+  currentBid: { type: Number, default: 0 }, //currentBid will be highest Bid placed on this auction by highest Bidder
   startTime: Date,
   endTime: Date,
   image: {
