@@ -4,6 +4,8 @@ import { ApiResponse } from "../utlis/ApiResponse.js";
 import { Auction } from "../models/auction.model.js";
 import { uploadOnCloudinary } from "../utlis/cloudinary.js";
 import mongoose from "mongoose";
+import { User } from "../models/user.model.js";
+import { Bid } from "../models/bid.model.js";
 
 const addNewAuctionItem = asyncHandler(async (req, res) => {
   // 1) take all required text fields + add checks so that user must give them
@@ -186,10 +188,105 @@ const deleteAuctionItem = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Successfully deleted User Auction item!"));
 });
 
+const republishAuctionItem = asyncHandler(async (req, res) => {
+  // An auctioneer can republish/renew their auction if the auction has ended without a sale or if the highest bidder does not purchase the item.
+
+  // 1) get auction item id from url and check it if its valid ObjectId or not
+  // 2) find auction item from database and checks in it specially if its still active or not
+  // 3) must take new start and end time for auction and add checks in both times if its correct or not
+  // 4) if highest Bidder on this auction exist then update him by substracting his moneySpent on this auction & decrementing its auctionWon field by one
+  // 5) update auction item details by removing all data related to previous bids and add new timings
+  // 6) delete all previously placed bids  on this auction
+  // 7) find Auctioneer and update its unpaidComission to zero
+  // 8) send response
+
+  // 1)
+  const { auctionItemId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(auctionItemId)) {
+    throw new ApiError(400, "Invalid id (auction item id)");
+  }
+
+  //  2)
+  const auctionItemToBeRepulished = await Auction.findOne({
+    _id: auctionItemId,
+  });
+  if (!auctionItemToBeRepulished) {
+    throw new ApiError(
+      400,
+      "You doensnot have any auction item or No auction item found in database or incorrect auction item id!"
+    );
+  }
+  if (auctionItemToBeRepulished.endTime > Date.now()) {
+    throw new ApiError(
+      400,
+      "Your auction is still active, you cannot republish it"
+    );
+  }
+
+  // 3)
+  const { newStartTime, newEndTime } = req.body;
+  if (!newStartTime?.trim() || !newEndTime?.trim()) {
+    throw new ApiError(
+      400,
+      "Must give new Start-Time and new End-Time of this Auction to republish it"
+    );
+  }
+
+  if (new Date(newStartTime) < Date.now()) {
+    throw new ApiError(
+      400,
+      "Auction start time must be greater then current time!"
+    );
+  }
+  if (new Date(newStartTime) > new Date(newEndTime)) {
+    throw new ApiError(400, "Auction start time must be less then end time!");
+  }
+
+  // 4)
+  const highestBidder = auctionItemToBeRepulished.highestBidder;
+  if (highestBidder) {
+    const highestBidderToBeModified = await User.findById(highestBidder);
+    highestBidderToBeModified.moneySpent -=
+      auctionItemToBeRepulished.currentBid; //currentBid is a highest Bidd
+    highestBidderToBeModified.auctionWon -= 1;
+    await highestBidderToBeModified.save();
+  }
+
+  // 5)
+  auctionItemToBeRepulished.bids = [];
+  auctionItemToBeRepulished.commissionCalculated = false;
+  auctionItemToBeRepulished.currentBid = 0;
+  auctionItemToBeRepulished.highestBidder = null;
+  auctionItemToBeRepulished.startTime = newStartTime;
+  auctionItemToBeRepulished.endTime = newEndTime;
+  await auctionItemToBeRepulished.save();
+
+  // 6)
+  await Bid.deleteMany({
+    auctionItem: auctionItemToBeRepulished._id,
+  });
+
+  // 7)
+  await User.findByIdAndUpdate(auctionItemToBeRepulished.createdBy, {
+    unpaidCommission: 0,
+  });
+
+  // 8)
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        `Auction republished Successfully and will be live at ${newStartTime} & end ${newEndTime}`
+      )
+    );
+});
+
 export {
   addNewAuctionItem,
   getAllAuctionItems,
   getAuctionItemDetails,
   getUserAuctionItems,
   deleteAuctionItem,
+  republishAuctionItem,
 };

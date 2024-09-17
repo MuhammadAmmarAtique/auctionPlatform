@@ -5,7 +5,8 @@ import {
   getAllAuctionItems,
   getAuctionItemDetails,
   getUserAuctionItems,
-  deleteAuctionItem
+  deleteAuctionItem,
+  republishAuctionItem
 } from "../controllers/auction.controller.js";
 
 const router = Router();
@@ -34,6 +35,12 @@ router.delete(
   isAuthenticated,
   isAuthorized("Auctioneer"),
   deleteAuctionItem
+);
+router.put(
+  "/republishAuctionItem/:auctionItemId",
+  isAuthenticated,
+  isAuthorized("Auctioneer"),
+  republishAuctionItem
 );
 
 export default router;
