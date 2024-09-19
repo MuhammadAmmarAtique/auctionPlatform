@@ -48,6 +48,7 @@ export const placeBid = asyncHandler(async (req, res) => {
   // 3)
   const existedBid = await Bid.findOne({
     "bidder.id": req.user._id,
+    "auctionItem": auction._id
   });
 
   if (existedBid) {
