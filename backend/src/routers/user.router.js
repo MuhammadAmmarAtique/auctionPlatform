@@ -8,7 +8,7 @@ import {
   deleteUser,
   fetchLeaderboard,
 } from "../controllers/user.controller.js";
-import { isAuthenticated } from "../middlewares/auth.js";
+import { isAuthenticated } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
