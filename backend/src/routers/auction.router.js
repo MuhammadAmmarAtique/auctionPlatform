@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
+import { isAuthenticated, isAuthorized } from "../middlewares/auth.middleware.js";
+import { trackCommissionStatus } from "../middlewares/trackCommissionStatus.middleware.js";
 import {
   addNewAuctionItem,
   getAllAuctionItems,
@@ -15,6 +16,7 @@ router.post(
   "/add-new-auction-Item",
   isAuthenticated,
   isAuthorized("Auctioneer"),
+  trackCommissionStatus,
   addNewAuctionItem
 );
 
