@@ -8,9 +8,9 @@ import mongoose from "mongoose";
 export const placeBid = asyncHandler(async (req, res) => {
   // 1- find auction by id on which bid will be placed by user (Bidder)
   // 2- take amount (add check its not empty &  it must be greater then Auction starting bid + current bid)
-  // 3- update auction object
-  // 4- create bid object
-  // 5- send response
+  // 3- if bid is already placed by bidder then handling that case first by updating auction and bid object
+  // 4- else placing new bid on auction by updating auction object &
+  // 5- creating new bid object
 
   // 1)
   const { auctionId } = req.params;
@@ -46,32 +46,67 @@ export const placeBid = asyncHandler(async (req, res) => {
   }
 
   // 3)
-  auction.currentBid = amount;
-  auction.bids.push({
-    userId: req.user._id,
-    userName: req.user.username,
-    profileImage: req.user.profileImage.url,
-    amount: amount,
+  const existedBid = await Bid.findOne({
+    "bidder.id": req.user._id,
   });
-  auction.highestBidder = req.user._id;
-  await auction.save();
 
-  // 4)
-  const bid = await Bid.create({
-    amount: amount,
-    bidder: {
-      id: req.user._id,
+  if (existedBid) {
+    // a) updating existed bid
+    existedBid.amount = amount;
+    await existedBid.save();
+
+    // b) updating auction
+    auction.currentBid = amount;
+    auction.highestBidder = req.user._id;
+    //finding existed bid inside auction and updating it
+    const existedBidInAuctionObj = auction.bids.find(
+      (bid) => bid.userId.equals(req.user._id) // Use .equals() to compare ObjectId values
+    );
+    existedBidInAuctionObj.amount = amount;
+    await auction.save();
+
+    res.status(200).json(
+      new ApiResponse(
+        200,
+        "Successfully updated your bid on this Auction Item",
+        {
+          "Updated existedBid::: ": existedBid,
+          "Updated Auction Item with your updated Bid::: ": auction,
+        }
+      )
+    );
+  } else {
+    // 4)
+    auction.currentBid = amount;
+    auction.bids.push({
+      userId: req.user._id,
       userName: req.user.username,
       profileImage: req.user.profileImage.url,
-    },
-    auctionItem: auctionId,
-  });
+      amount: amount,
+    });
+    auction.highestBidder = req.user._id;
+    await auction.save();
 
-  // 5)
-  res.status(200).json(
-    new ApiResponse(200, "Successfully placed bid on Auction Item", {
-      "bid::: ": bid,
-      "Updated Auction Item with newly Placed Bid::: ": auction,
-    })
-  );
+    // 5)
+    const bid = await Bid.create({
+      amount: amount,
+      bidder: {
+        id: req.user._id,
+        userName: req.user.username,
+        profileImage: req.user.profileImage.url,
+      },
+      auctionItem: auctionId,
+    });
+
+    res.status(200).json(
+      new ApiResponse(
+        200,
+        "Successfully placed your bid on this Auction Item",
+        {
+          "bid::: ": bid,
+          "Updated Auction Item with newly Placed Bid::: ": auction,
+        }
+      )
+    );
+  }
 });
