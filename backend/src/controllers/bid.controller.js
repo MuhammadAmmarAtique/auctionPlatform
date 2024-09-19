@@ -41,7 +41,7 @@ export const placeBid = asyncHandler(async (req, res) => {
   if (auction.currentBid > 0 && amount <= auction.currentBid) {
     throw new ApiError(
       400,
-      `Bid amount must be greater then Current Bid i.e ${auction.currentBid} `
+      `Bid amount must be greater then Current Bid by 500 i.e ${auction.currentBid + 500} `
     );
   }
 
