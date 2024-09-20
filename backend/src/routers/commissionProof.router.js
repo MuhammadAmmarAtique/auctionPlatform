@@ -1,5 +1,5 @@
 import Router from "express";
-import { calculateComission } from "../controllers/commissionProof.controller.js";
+import { calculateComission, proofOfComission } from "../controllers/commissionProof.controller.js";
 import {
   isAuthenticated,
   isAuthorized,
@@ -13,5 +13,12 @@ router.post(
   isAuthorized("Auctioneer"),
   calculateComission
 );
+
+router.post(
+  "/proofOfComission",
+  isAuthenticated,
+  isAuthorized("Auctioneer"),
+  proofOfComission
+)
 
 export default router;
