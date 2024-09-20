@@ -6,7 +6,7 @@ import { Bid } from "../models/bid.model.js";
 import mongoose from "mongoose";
 
 export const placeBid = asyncHandler(async (req, res) => {
-  // 1- find auction by id on which bid will be placed by user (Bidder)
+  // 1- find auction by id on which bid will be placed by Bidder and add necessary checks
   // 2- take amount (add check its not empty &  it must be greater then Auction starting bid + current bid)
   // 3- if bid is already placed by bidder then handling that case first by updating auction and bid object
   // 4- else placing new bid on auction by updating auction object &
@@ -24,7 +24,9 @@ export const placeBid = asyncHandler(async (req, res) => {
       "Incorrect auction id or Auction doesnot exists in database!"
     );
   }
-  
+  if (new Date(auction.startTime) >  Date.now()) {
+    throw new ApiError(400, "You cannot place Bid as Auction has not Started yet!");
+  }
   if (new Date(auction.endTime) <  Date.now()) {
     throw new ApiError(400, "You cannot place Bid as Auction is already Ended!");
   }
