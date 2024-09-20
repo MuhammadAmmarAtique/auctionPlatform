@@ -1,5 +1,5 @@
 import Router from "express";
-import { deleteAuctionItem } from "../controllers/superAdmin.controller.js";
+import { deleteAuctionItem, getAllPaymentProofs } from "../controllers/superAdmin.controller.js";
 import {
   isAuthenticated,
   isAuthorized,
@@ -11,4 +11,6 @@ router
   .route("/deleteAuctionItem/:auctionId")
   .delete(isAuthenticated, isAuthorized("Super Admin"), deleteAuctionItem);
 
+router.get("/getAllPaymentProofs",isAuthenticated, isAuthorized("Super Admin"),getAllPaymentProofs)
+  
 export default router;

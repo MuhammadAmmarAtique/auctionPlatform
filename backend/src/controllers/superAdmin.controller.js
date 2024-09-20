@@ -3,7 +3,7 @@ import { ApiResponse } from "../utlis/ApiResponse.js";
 import { ApiError } from "../utlis/ApiError.js";
 import mongoose from "mongoose";
 import { Auction } from "../models/auction.model.js";
-import { response } from "express";
+import { CommissionProof } from "../models/commissionProof.model.js";
 
 const deleteAuctionItem = asyncHandler(async (req, res) => {
   const { auctionId } = req.params;
@@ -19,4 +19,20 @@ const deleteAuctionItem = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, "Successfully deleted Auction!"));
 });
 
-export { deleteAuctionItem };
+const getAllPaymentProofs = asyncHandler(async (req, res) => {
+  const AllPaymentProofs = await CommissionProof.find();
+
+  if (AllPaymentProofs.length === 0) {
+    throw new ApiError(200, "No payment proofs exist or found in database");
+  }
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, "Successfully fetched all payment prooofs!", {
+        "AllPaymentProofs:": AllPaymentProofs,
+      })
+    );
+});
+
+export { deleteAuctionItem, getAllPaymentProofs };
