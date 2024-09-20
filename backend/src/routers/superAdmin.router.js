@@ -8,7 +8,7 @@ import {
 const router = Router();
 
 router
-  .route("/deleteAuctionItem")
+  .route("/deleteAuctionItem/:auctionId")
   .delete(isAuthenticated, isAuthorized("Super Admin"), deleteAuctionItem);
 
 export default router;
