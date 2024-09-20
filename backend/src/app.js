@@ -19,6 +19,7 @@ import healthcheckRouter from "./routers/healthcheck.router.js";
 import userRouter from "./routers/user.router.js";
 import auctionRouter from "./routers/auction.router.js";
 import bidRouter from "./routers/bid.router.js";
+import commissionProof from "./routers/commissionProof.router.js";
 
 
 // routers declaration
@@ -26,6 +27,7 @@ app.use("/api/v1/healthcheck",healthcheckRouter)
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/auctions",auctionRouter)
 app.use("/api/v1/bids",bidRouter)
+app.use("/api/v1/comissionProofs",commissionProof)
 
 
 export { app };
