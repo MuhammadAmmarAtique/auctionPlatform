@@ -109,9 +109,25 @@ const updatePaymentProof = asyncHandler(async (req, res) => {
     );
 });
 
+const deletePaymentProof = asyncHandler(async (req, res) => {
+  const { paymentProofId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(paymentProofId)) {
+    throw new ApiError(400, "Invalid Payment Proof id!");
+  }
+
+  const response = await CommissionProof.findByIdAndDelete(paymentProofId);
+  if (!response) {
+    throw new ApiError(404, "CommissionProof doesnot exist or Incorrect  Payment Proof id!");
+  }
+
+  res.status(200).json(new ApiResponse(200, "Successfully deleted CommissionProof!"));
+});
+
 export {
   deleteAuctionItem,
   getAllPaymentProofs,
   getPaymentProofDetail,
   updatePaymentProof,
+  deletePaymentProof
 };

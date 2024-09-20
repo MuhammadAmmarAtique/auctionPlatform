@@ -4,6 +4,7 @@ import {
   getAllPaymentProofs,
   getPaymentProofDetail,
   updatePaymentProof,
+  deletePaymentProof
 } from "../controllers/superAdmin.controller.js";
 import {
   isAuthenticated,
@@ -37,6 +38,13 @@ router.put(
   isAuthenticated,
   isAuthorized("Super Admin"),
   updatePaymentProof
+);
+
+router.delete(
+  "/deletePaymentProof/:paymentProofId",
+  isAuthenticated,
+  isAuthorized("Super Admin"),
+  deletePaymentProof
 );
 
 export default router;
