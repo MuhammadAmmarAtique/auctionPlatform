@@ -26,13 +26,33 @@ const getAllPaymentProofs = asyncHandler(async (req, res) => {
     throw new ApiError(200, "No payment proofs exist or found in database");
   }
 
+  res.status(200).json(
+    new ApiResponse(200, "Successfully fetched all payment prooofs!", {
+      "AllPaymentProofs:": AllPaymentProofs,
+    })
+  );
+});
+
+const getPaymentProofDetail = asyncHandler(async (req, res) => {
+  const { paymentProofId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(paymentProofId)) {
+    throw new ApiError(400, "Invalid Payment Proof id!");
+  }
+
+  const paymentProof = await CommissionProof.findById(paymentProofId);
+  if (!paymentProof) {
+    throw new ApiError(
+      400,
+      "Payment proof doesnot exist in database or incorrect payment proof id!"
+    );
+  }
+
   res
     .status(200)
     .json(
-      new ApiResponse(200, "Successfully fetched all payment prooofs!", {
-        "AllPaymentProofs:": AllPaymentProofs,
-      })
+      new ApiResponse(200, "Successfully fetched payment proof!", paymentProof)
     );
 });
 
-export { deleteAuctionItem, getAllPaymentProofs };
+export { deleteAuctionItem, getAllPaymentProofs, getPaymentProofDetail };
