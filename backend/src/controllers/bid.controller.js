@@ -24,6 +24,10 @@ export const placeBid = asyncHandler(async (req, res) => {
       "Incorrect auction id or Auction doesnot exists in database!"
     );
   }
+  
+  if (new Date(auction.endTime) <  Date.now()) {
+    throw new ApiError(400, "You cannot place Bid as Auction is already Ended!");
+  }
 
   // 2)
   const { amount } = req.body;
@@ -41,7 +45,7 @@ export const placeBid = asyncHandler(async (req, res) => {
   if (auction.currentBid > 0 && amount <= auction.currentBid) {
     throw new ApiError(
       400,
-      `Bid amount must be greater then Current Bid by 500 i.e ${auction.currentBid + 500} `
+      `Bid amount must be greater then Current Bid by atleast rupees 500 i.e ${auction.currentBid + 500} `
     );
   }
 
