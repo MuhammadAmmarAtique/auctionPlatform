@@ -16,10 +16,6 @@ const commissionProofSchema = new mongoose.Schema({
       required: true,
     },
   },
-  uploadedAt: {
-    type: Date,
-    default: Date.now,
-  },
   status: {
     type: String,
     default: "Pending",
