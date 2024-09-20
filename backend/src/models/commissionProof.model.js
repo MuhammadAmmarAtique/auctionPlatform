@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const paymentProofSchema = new mongoose.Schema({
+const commissionProofSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -31,4 +31,4 @@ const paymentProofSchema = new mongoose.Schema({
 { timestamps: true }
 );
 
-export const PaymentProof = mongoose.model("PaymentProof", paymentProofSchema);
+export const CommissionProof = mongoose.model("CommissionProof", commissionProofSchema);
