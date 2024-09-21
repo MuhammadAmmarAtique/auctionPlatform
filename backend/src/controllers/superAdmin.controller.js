@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import { Auction } from "../models/auction.model.js";
 import { User } from "../models/user.model.js";
 import { CommissionProof } from "../models/commissionProof.model.js";
+import { Commission } from "../models/commission.model.js";
 
 const deleteAuctionItem = asyncHandler(async (req, res) => {
   const { auctionId } = req.params;
@@ -119,10 +120,15 @@ const deletePaymentProof = asyncHandler(async (req, res) => {
 
   const response = await CommissionProof.findByIdAndDelete(paymentProofId);
   if (!response) {
-    throw new ApiError(404, "CommissionProof doesnot exist or Incorrect  Payment Proof id!");
+    throw new ApiError(
+      404,
+      "CommissionProof doesnot exist or Incorrect  Payment Proof id!"
+    );
   }
 
-  res.status(200).json(new ApiResponse(200, "Successfully deleted CommissionProof!"));
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Successfully deleted CommissionProof!"));
 });
 
 const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
@@ -191,6 +197,51 @@ const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
   );
 });
 
+const getMonthlyRevenue = asyncHandler(async (req, res) => {
+  const paymentsReceived  = await Commission.aggregate([
+    {
+      $group: {
+        _id: {
+          month: { $month: "$createdAt" },
+          year: { $year: "$createdAt" },
+        },
+        totalRevenue: { $sum: "$amount" },
+      },
+    },
+    {
+      $project: {
+        month: "$_id.month",
+        year: "$_id.year",
+        _id: 0,
+        totalRevenue: 1,
+      },
+    },
+  ]);
+
+  const transformData = (data, months = 12) => {
+    let result = Array(months).fill(0);
+
+    data.forEach((elem) => {
+      result[elem.month - 1] = elem.totalRevenue;
+    });
+
+    return result;
+  };
+
+  const monthlyRevenue =  transformData(paymentsReceived)
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      "Successfully fetched Monthly Revenue and Transformed it into a Array showing how much Super Admin earned per month!",
+      {
+        "Monthly Revenue:::": monthlyRevenue
+      }
+    )
+  );
+
+});
+
 export {
   deleteAuctionItem,
   getAllPaymentProofs,
@@ -198,4 +249,5 @@ export {
   updatePaymentProof,
   deletePaymentProof,
   getRegisteredUserCountByMonth,
+  getMonthlyRevenue,
 };

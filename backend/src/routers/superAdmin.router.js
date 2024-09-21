@@ -5,7 +5,8 @@ import {
   getPaymentProofDetail,
   updatePaymentProof,
   deletePaymentProof,
-  getRegisteredUserCountByMonth
+  getRegisteredUserCountByMonth,
+  getMonthlyRevenue
 } from "../controllers/superAdmin.controller.js";
 import {
   isAuthenticated,
@@ -53,6 +54,13 @@ router.get(
   isAuthenticated,
   isAuthorized("Super Admin"),
   getRegisteredUserCountByMonth
+)
+
+router.get(
+  "/getMonthlyRevenue",
+  isAuthenticated,
+  isAuthorized("Super Admin"),
+  getMonthlyRevenue
 )
 
 export default router;
