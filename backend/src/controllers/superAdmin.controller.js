@@ -3,6 +3,7 @@ import { ApiResponse } from "../utlis/ApiResponse.js";
 import { ApiError } from "../utlis/ApiError.js";
 import mongoose from "mongoose";
 import { Auction } from "../models/auction.model.js";
+import { User } from "../models/user.model.js";
 import { CommissionProof } from "../models/commissionProof.model.js";
 
 const deleteAuctionItem = asyncHandler(async (req, res) => {
@@ -124,10 +125,77 @@ const deletePaymentProof = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, "Successfully deleted CommissionProof!"));
 });
 
+const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
+  const allUsers = await User.aggregate([
+    // 1) it will group document who has same role & same month and year of createion
+    {
+      $group: {
+        _id: {
+          month: { $month: "$createdAt" },
+          year: { $year: "$createdAt" },
+          role: "$role",
+        },
+        count: { $sum: 1 },
+      },
+    },
+    // 2) projecting & making data structure better
+    {
+      $project: {
+        month: "$_id.month",
+        year: "$_id.year",
+        role: "$_id.role",
+        count: 1,
+        _id: 0,
+      },
+    },
+    //3) sorting documents in ascending order by year i.e 2023, 2024
+    {
+      $sort: {
+        year: 1,
+      },
+    },
+  ]);
+
+  // 4) separating bidders and auctioneers
+  const bidders = allUsers.filter((user) => user.role === "Bidder");
+  const auctioneers = allUsers.filter((user) => user.role === "Auctioneer");
+
+  // 5) now we will transform Users data in a Array which will tell us from 1st month to 12th month, how many users are registered in each month, it will be helpful to show this data as a graph in frontend
+
+  const transformData = (data, months = 12) => {
+    //making empty array with 12 elements (all values are zero)
+    let result = Array(months).fill(0);
+    //  filling  "result" array with actual data
+    data.forEach((item) => {
+      result[item.month - 1] = item.count;
+    });
+    // returning result
+    return result;
+  };
+
+  const biddersRegisteredInEachMonth = transformData(bidders);
+  const auctioneersRegisteredInEachMonth = transformData(auctioneers);
+
+  // 6) return response
+
+  res.status(200).json(
+    new ApiResponse(
+      200,
+      "Successfully fetched Users data and Transformed them into a Array showing in which month how many users are registered!",
+      {
+        "Bidders Registered In each Month:::": biddersRegisteredInEachMonth,
+        "Auctioneers Registered In each Month:::":
+          auctioneersRegisteredInEachMonth,
+      }
+    )
+  );
+});
+
 export {
   deleteAuctionItem,
   getAllPaymentProofs,
   getPaymentProofDetail,
   updatePaymentProof,
-  deletePaymentProof
+  deletePaymentProof,
+  getRegisteredUserCountByMonth,
 };
