@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import {auctionEndedCron} from "./automation/auctionEndedCron.js"
 
 const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
@@ -30,6 +31,9 @@ app.use("/api/v1/auctions",auctionRouter)
 app.use("/api/v1/bids",bidRouter)
 app.use("/api/v1/comissionProofs",commissionProofRouter)
 app.use("/api/v1/superAdmins",superAdminRouter)
+
+// Crons
+auctionEndedCron.start();
 
 
 export { app };
