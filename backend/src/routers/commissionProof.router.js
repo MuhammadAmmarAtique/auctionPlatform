@@ -8,13 +8,6 @@ import {
 const router = Router();
 
 router.post(
-  "/calculate-comission",
-  isAuthenticated,
-  isAuthorized("Auctioneer"),
-  calculateComission
-);
-
-router.post(
   "/proofOfComission",
   isAuthenticated,
   isAuthorized("Auctioneer"),
