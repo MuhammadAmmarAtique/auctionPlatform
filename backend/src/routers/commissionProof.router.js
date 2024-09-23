@@ -1,5 +1,5 @@
 import Router from "express";
-import { calculateComission, proofOfComission } from "../controllers/commissionProof.controller.js";
+import { proofOfComission } from "../controllers/commissionProof.controller.js";
 import {
   isAuthenticated,
   isAuthorized,
