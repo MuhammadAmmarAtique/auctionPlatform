@@ -1,3 +1,5 @@
+// This cron will run every min to look for ended auctions who were successfully sold and whose comission is not calcualted, after finding auctions calcualting auctions unpaid comission and updating auction , auctioneer(User) & highest bidder(User) objects fields  also sending email to highest bidder to let know he/she has won the auction and asking him to do their payment.
+
 import cron from "node-cron";
 import { Auction } from "../models/auction.model.js";
 import { User } from "../models/user.model.js";
