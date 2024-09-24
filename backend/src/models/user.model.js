@@ -1,3 +1,4 @@
+// There are 3 types of users: "Auctioneer", "Bidder", and "Super Admin"
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -52,6 +53,7 @@ const userSchema = new mongoose.Schema(
         required: true,
       },
     },
+    // The "Auctioneer" is required to provide payment methods
     paymentMethods: {
       bankTransfer: { 
         bankAccountNumber: String,
@@ -65,10 +67,12 @@ const userSchema = new mongoose.Schema(
         paypalEmail: String,
       },
     },
+    // This field is only applicable to the "Auctioneer"
     unpaidCommission: {
       type: Number,
       default: 0,
     },
+    // The following 2 fields are only applicable to the "Bidder"
     auctionWon: {
       type: Number,
       default: 0,
