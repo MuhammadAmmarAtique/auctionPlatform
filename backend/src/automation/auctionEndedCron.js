@@ -8,6 +8,7 @@ import { sendEmail } from "../utlis/nodemailer.js";
 
 const auctionEnded = async () => {
   try {
+    console.log(`Cron for auctionEnded started...`); 
     const allEndedAuctions = await Auction.find({
       endTime: { $lt: new Date() },
       currentBid: { $gt: 0 },
@@ -51,6 +52,7 @@ const auctionEnded = async () => {
         });
       }
     }
+    console.log(`Cron for auctionEnded ended!`); 
   } catch (error) {
     console.log("Error in auctionEndedCron:::", error);
   }

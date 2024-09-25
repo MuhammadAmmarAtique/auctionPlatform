@@ -14,6 +14,7 @@ import { sendEmail } from "../utlis/nodemailer.js";
 
 const verifyComission = async () => {
   try {
+    console.log(`Cron for verifyComission started... `); 
     const allApprovedComissionProofs = await CommissionProof.find({
       status: "Approved",
     });
@@ -73,6 +74,7 @@ const verifyComission = async () => {
         });
       }
     }
+    console.log(`Cron for verifyComission ended!`); 
   } catch (error) {
     console.log("Error in verifyComissionCron:::", error);
   }
