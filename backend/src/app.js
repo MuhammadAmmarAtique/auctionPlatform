@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import {auctionEndedCron} from "./automation/auctionEndedCron.js"
+import {verifyComissionCron} from "./automation/verifyComissionCron.js"
 
 const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
@@ -34,6 +35,7 @@ app.use("/api/v1/superAdmins",superAdminRouter)
 
 // Crons
 auctionEndedCron.start();
+verifyComissionCron.start();
 
 
 export { app };
