@@ -7,11 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <Router>
-      <SideDrawer />
+     <SideDrawer />  {/* it will serve as navbar & will always appear */}
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
-      <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" /> {/* it will shows messages & will always appear */}
     </Router>
   );
 }
