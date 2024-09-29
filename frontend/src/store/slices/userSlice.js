@@ -11,6 +11,22 @@ const userSlice = createSlice({
     leaderboard: []
   },
   reducers: {
+    //signup reducers
+    signupRequest(state,action){
+      state.loading = true,
+      state.isAuthenticated = false,
+      state.user =  {}
+    },
+    signupSuccess(state,action){
+      state.loading = false,
+      state.isAuthenticated = true,
+      state.user =  action.payload.user
+    },
+    signupFailed(state,action){
+      state.loading = false,
+      state.isAuthenticated = false,
+      state.user = {}
+    },
     //logout reducers
     logoutSuccess(state, action) {
       state.isAuthenticated = false,
@@ -29,6 +45,27 @@ const userSlice = createSlice({
     }
   }
 });
+
+export const signup = (data) => async (dispatch) => {
+  dispatch(userSlice.actions.signupRequest());
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/v1/users/register",
+      data,
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    dispatch(userSlice.actions.signupSuccess(response.data));
+    toast.success(response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.signupFailed());
+    toast.error(error.response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  }
+};
 
 export const logout = () => async (dispatch) => {
   try {
