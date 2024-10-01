@@ -46,7 +46,7 @@ const userSlice = createSlice({
   }
 });
 
-export const signup = (data) => async (dispatch) => {
+export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.signupRequest());
   try {
     const response = await axios.post(
