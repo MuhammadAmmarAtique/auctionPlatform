@@ -133,6 +133,7 @@ const Signup = () => {
             <div className="flex flex-col sm:flex-1">
               <label className="text-[16px] text-stone-600">Password</label>
               <input
+                autoComplete="current-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
