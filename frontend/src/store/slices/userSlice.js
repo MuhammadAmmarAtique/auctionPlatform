@@ -63,7 +63,6 @@ export const register = (data) => async (dispatch) => {
   } catch (error) {
     dispatch(userSlice.actions.signupFailed());
     toast.error(error.response.data.message);
-    console.log("error.response.data: ", error.response);
     dispatch(userSlice.actions.clearAllErrors());
   }
 };
