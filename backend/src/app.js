@@ -6,7 +6,10 @@ import {auctionEndedCron} from "./automation/auctionEndedCron.js"
 import {verifyComissionCron} from "./automation/verifyComissionCron.js"
 
 const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+app.use(cors({
+   origin: process.env.CORS_ORIGIN, // Frontend origin
+   credentials: true, // Allow credentials (cookies, headers)
+   }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
