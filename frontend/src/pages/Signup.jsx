@@ -110,6 +110,7 @@ const Signup = () => {
             <div className="flex flex-col sm:flex-1">
               <label className="text-[16px] text-stone-600">Address</label>
               <input
+                autoComplete="home-address"
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
