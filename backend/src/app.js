@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import {auctionEndedCron} from "./automation/auctionEndedCron.js"
 import {verifyComissionCron} from "./automation/verifyComissionCron.js"
+import errorHandler from "./middlewares/errorHandler.js"
 
 const app = express();
 app.use(cors({
@@ -39,6 +40,9 @@ app.use("/api/v1/superAdmins",superAdminRouter)
 // Crons
 auctionEndedCron.start();
 verifyComissionCron.start();
+
+// errorHandler middleware
+app.use(errorHandler);
 
 
 export { app };
