@@ -40,9 +40,6 @@ const Signup = () => {
       formData.append("easypaisaAccountNumber", easypaisaAccountNumber),
       formData.append("paypalEmail", paypalEmail));
     dispatch(register(formData));
-
-    console.log("formData:::",formData);
-
   };
 
   const profileImgPreviewHandler = (e) => {
