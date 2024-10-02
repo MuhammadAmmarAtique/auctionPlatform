@@ -18,6 +18,13 @@ const errorHandler = (err, req, res, next) => {
     errors: [],
     data: null
   });
+  
+console.error(`[Error] - ${new Date().toISOString()}: An error occurred in the backend application`);
+console.err(`err: ${err}`);
+console.error(`Error Message: ${err.message}`);
+console.error(`Stack Trace: ${err.stack}`);
+
+  
 };
 
 export default errorHandler;
