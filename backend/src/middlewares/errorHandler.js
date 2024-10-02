@@ -1,5 +1,4 @@
-// errorHandler.js
-import { ApiError } from  "../utlis/ApiError.js"
+import { ApiError } from "../utlis/ApiError.js";
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof ApiError) {
@@ -7,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
       success: false,
       message: err.message,
       errors: err.errors,
-      data: err.data
+      data: err.data,
     });
   }
 
@@ -16,15 +15,15 @@ const errorHandler = (err, req, res, next) => {
     success: false,
     message: "Internal Server Error",
     errors: [],
-    data: null
+    data: null,
   });
-  
-console.error(`[Error] - ${new Date().toISOString()}: An error occurred in the backend application`);
-console.err(`err: ${err}`);
-console.error(`Error Message: ${err.message}`);
-console.error(`Stack Trace: ${err.stack}`);
 
-  
+  console.error(
+    `[Error] - ${new Date().toISOString()}: An error occurred in the backend application`
+  );
+  console.err(`err: ${err}`);
+  console.error(`Error Message: ${err.message}`);
+  console.error(`Stack Trace: ${err.stack}`);
 };
 
 export default errorHandler;
