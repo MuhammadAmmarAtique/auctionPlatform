@@ -78,7 +78,13 @@ export const register = (data) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/v1/users/logout", { withCredentials: true });
+    const response = await axios.post(
+      "http://localhost:3000/api/v1/users/logout", 
+      {}, // sending empty req body
+      { 
+        withCredentials: true,
+       }
+      );
     dispatch(userSlice.actions.logoutSuccess());
     toast.success(response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
