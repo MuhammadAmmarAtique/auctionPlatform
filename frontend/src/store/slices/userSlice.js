@@ -51,7 +51,7 @@ export const register = (data) => async (dispatch) => {
   try {
     const response = await axios.post(
       "http://localhost:3000/api/v1/users/register",
-      data,
+      data, // sending formdata in req body
       {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
