@@ -10,7 +10,7 @@ const errorHandler = (err, req, res, next) => {
       data: err.data,
     });
   }
-   // Mongoose Validation Error
+   // Mongoose Validation Error (min password or min phoneNumber length error)
    if (err.name === 'ValidationError') {
     const messages = Object.values(err.errors).map((error) => error.message);
     return res.status(400).json({
