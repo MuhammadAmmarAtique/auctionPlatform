@@ -20,7 +20,7 @@ const userSlice = createSlice({
     signupSuccess(state,action){
       state.loading = false,
       state.isAuthenticated = true,
-      state.user =  action.payload.user
+      state.user =  action.payload.data
     },
     signupFailed(state,action){
       state.loading = false,
