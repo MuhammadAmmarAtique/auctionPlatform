@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
       trim: true,
+      minLength: [3, "Full Name must caontain at least 3 characters."],
+      maxLength: [40, "Full Name cannot exceed 40 characters."],
     },
     email: {
       type: String,
@@ -22,7 +24,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minLength: [8, "minimum length of password must be eight!"],
+      minLength: [8, "Minimum length of password must be eight!"],
     },
     address: {
       type: String,
@@ -32,7 +34,7 @@ const userSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
       trim: true,
-      minLength: [11, "minimum length of phone number must be eleven!"],
+      minLength: [11, "Minimum length of phone number must be eleven!"],
       required: true,
     },
     role: {
