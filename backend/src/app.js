@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import {auctionEndedCron} from "./automation/auctionEndedCron.js"
 import {verifyComissionCron} from "./automation/verifyComissionCron.js"
-import errorHandler from "./middlewares/errorHandler.js"
+import errorHandler from "./middlewares/errorHandler.middleware.js"
 
 const app = express();
 app.use(cors({
