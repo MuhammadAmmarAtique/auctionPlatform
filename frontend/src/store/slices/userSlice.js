@@ -53,7 +53,23 @@ const userSlice = createSlice({
       state.isAuthenticated = state.isAuthenticated,
       state.user = state.user;
     },
-    // 4) reducer for clearing errors
+    //4) getUser reducers
+    getUserRequest(state,action){
+      state.loading = true,
+      state.isAuthenticated = false
+      state.user =  {}
+    },
+    getUserSuccess(state, action) {
+      state.loading = false,
+      state.isAuthenticated = true,
+      state.user = action.payload;
+    },
+    getUserFailed(state, action) {
+      state.loading = false,
+      state.isAuthenticated = false,
+      state.user = {};
+    },
+    // 5) reducer for clearing errors
     clearAllErrors(state, action) {
       state.loading = false,
       state.isAuthenticated = state.isAuthenticated,
@@ -129,6 +145,25 @@ export const logout = () => async (dispatch) => {
   } catch (error) {
     dispatch(userSlice.actions.logoutFailed());
     toast.error(error.response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  }
+};
+
+// getUser method Keep users logged in & get user data by using cookies  when the page reloads or browser reopen
+
+export const getUser = () => async (dispatch) => {
+  dispatch(userSlice.actions.getUserRequest());
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/api/v1/users/get-user",
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(userSlice.actions.getUserSuccess(response.data.data));
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.getUserFailed());
     dispatch(userSlice.actions.clearAllErrors());
   }
 };
