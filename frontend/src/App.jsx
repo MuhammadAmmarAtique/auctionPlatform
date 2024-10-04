@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SideDrawer from "./layout/SideDrawer";
 import Home from "./pages/home";
 import Signup from "./pages/Signup";
+import Login from "./pages/Login"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<Signup />} />
+        <Route path="/login" element = {<Login />} />
       </Routes>
       <ToastContainer position="top-right" /> {/* it will shows messages & will always appear */}
     </Router>
