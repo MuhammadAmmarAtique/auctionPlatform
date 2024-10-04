@@ -11,7 +11,7 @@ const userSlice = createSlice({
     leaderboard: []
   },
   reducers: {
-    //signup reducers
+    // 1) signup reducers
     signupRequest(state,action){
       state.loading = true,
       state.isAuthenticated = false,
@@ -27,7 +27,7 @@ const userSlice = createSlice({
       state.isAuthenticated = false,
       state.user = {}
     },
-    //login reducers
+    // 2) login reducers
     loginRequest(state,action){
       state.loading = true,
       state.isAuthenticated = false
@@ -43,7 +43,7 @@ const userSlice = createSlice({
       state.isAuthenticated = false,
       state.user = {}
     },
-    //logout reducers
+    // 3) logout reducers
     logoutSuccess(state, action) {
       state.isAuthenticated = false,
       state.user = {};
@@ -53,6 +53,7 @@ const userSlice = createSlice({
       state.isAuthenticated = state.isAuthenticated,
       state.user = state.user;
     },
+    // 4) reducer for clearing errors
     clearAllErrors(state, action) {
       state.loading = false,
       state.isAuthenticated = state.isAuthenticated,
@@ -100,7 +101,7 @@ export const login = (data) => async (dispatch) => {
       data,
       {
         withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "application/json" },
       }
     );
     dispatch(userSlice.actions.loginSuccess(response.data));
