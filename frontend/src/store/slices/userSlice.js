@@ -27,6 +27,22 @@ const userSlice = createSlice({
       state.isAuthenticated = false,
       state.user = {}
     },
+    //login reducers
+    loginRequest(state,action){
+      state.loading = true,
+      state.isAuthenticated = false
+      state.user =  {}
+    },
+    loginSuccess(state,action){
+      state.loading = false,
+      state.isAuthenticated = true,
+      state.user= action.payload.data
+    },
+    loginFailed(state,action){
+      state.loading = false,
+      state.isAuthenticated = false,
+      state.user = {}
+    },
     //logout reducers
     logoutSuccess(state, action) {
       state.isAuthenticated = false,
@@ -72,6 +88,27 @@ export const register = (data) => async (dispatch) => {
   } else {
     toast.error(error.response.data.message);
   }
+    dispatch(userSlice.actions.clearAllErrors());
+  }
+};
+
+export const login = (data) => async (dispatch) => {
+  dispatch(userSlice.actions.loginRequest());
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/v1/users/login",
+      data,
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    dispatch(userSlice.actions.logoutSuccess(response.data));
+    toast.success(response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.logoutFailed());
+    toast.error(error.response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
   }
 };
