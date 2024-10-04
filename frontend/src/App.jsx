@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element = {<Login />} />
+        <Route path="/submit-commission-proof" element = {<SubmitComissionProof />} />
       </Routes>
       <ToastContainer position="top-right" /> {/* it will shows messages & will always appear */}
     </Router>
