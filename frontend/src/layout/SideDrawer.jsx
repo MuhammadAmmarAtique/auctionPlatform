@@ -63,10 +63,10 @@ const SideDrawer = () => {
               <>
                 <li>
                   <Link
-                    to={"/submit-commission"}
-                    className="flex text-xl font-semibold gap-2 items-center hover:text-[#D6482b] hover:transition-all hover:duration-150"
+                    to={"/submit-commission-proof"}
+                    className="flex font-semibold gap-2 items-center hover:text-[#D6482b] hover:transition-all hover:duration-150"
                   >
-                    <FaFileInvoiceDollar /> Submit Commission
+                    <FaFileInvoiceDollar /> Submit Commission Proof
                   </Link>
                 </li>
                 <li>
