@@ -103,11 +103,11 @@ export const login = (data) => async (dispatch) => {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    dispatch(userSlice.actions.logoutSuccess(response.data));
+    dispatch(userSlice.actions.loginSuccess(response.data));
     toast.success(response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.logoutFailed());
+    dispatch(userSlice.actions.loginFailed());
     toast.error(error.response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
   }
