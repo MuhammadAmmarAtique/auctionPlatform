@@ -5,13 +5,20 @@ import SideDrawer from "./layout/SideDrawer";
 import { getUser } from "./store/slices/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Home, Signup, Login, SubmitComissionProof, HowItWorks } from "./pages/index";
+import {
+  Home,
+  Signup,
+  Login,
+  SubmitComissionProof,
+  HowItWorks,
+  About,
+} from "./pages/index";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser())
+    dispatch(getUser());
   }, []);
 
   return (
@@ -26,6 +33,7 @@ function App() {
           element={<SubmitComissionProof />}
         />
         <Route path="/how-it-works-info" element={<HowItWorks />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <ToastContainer position="top-right" />{" "}
       {/* it will shows messages & will always appear */}
