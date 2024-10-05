@@ -83,7 +83,7 @@ const About = () => {
             Our Story
           </h3>
           <p className="text-xl text-stone-600">
-            Founded by CodeWithZeeshu, Auction Platform was born out of a passion for
+            Founded by Team Auction Platform, Auction Platform was born out of a passion for
             connecting people with unique and valuable items. With years of
             experience in the auction industry, our team is committed to
             creating a platform that offers an unparalleled auction experience
