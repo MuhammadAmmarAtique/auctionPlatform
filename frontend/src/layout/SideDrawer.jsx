@@ -39,7 +39,7 @@ const SideDrawer = () => {
         <div className="relative">
           <Link to={"/"}>
             <h4 className="text-2xl font-semibold mb-4">
-              auction<span className="text-[#D6482b]">Platform</span>
+            Auction<span className="text-[#D6482b]">Platform</span>
             </h4>
           </Link>
           <ul className="flex flex-col gap-3">
@@ -180,14 +180,14 @@ const SideDrawer = () => {
           >
             Contact Us
           </Link>
-          <p className="text-stone-500">&copy; PrimeBid, LLC.</p>
+          <p className="text-stone-500">&copy; Auction Platform, LLC.</p>
           <p className="text-stone-500">
             Degined By{" "}
             <Link
               to={"/"}
               className="font-semibold hover:text-[#d6482b] hover:transition-all hover:duration-150"
             >
-              Team auctionPlatform
+              Team Auction Platform
             </Link>
           </p>
         </div>

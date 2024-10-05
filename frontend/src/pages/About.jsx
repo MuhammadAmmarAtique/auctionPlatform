@@ -38,7 +38,7 @@ const About = () => {
             About Us
           </h1>
           <p className="text-xl text-stone-600">
-            Welcome to AuctionNest, the ultimate destination for online auctions
+            Welcome to Auction Platform, the ultimate destination for online auctions
             and bidding excitement. Founded in 2024, we are dedicated to
             providing a dynamic and user-friendly platform for buyers and
             sellers to connect, explore, and transact in a secure and seamless
@@ -52,7 +52,7 @@ const About = () => {
             Our Mission
           </h3>
           <p className="text-xl text-stone-600">
-            At AuctionNest, our mission is to revolutionize the way people buy and
+            At Auction Platform, our mission is to revolutionize the way people buy and
             sell items online. We strive to create an engaging and trustworthy
             marketplace that empowers individuals and businesses to discover
             unique products, make informed decisions, and enjoy the thrill of
@@ -83,7 +83,7 @@ const About = () => {
             Our Story
           </h3>
           <p className="text-xl text-stone-600">
-            Founded by CodeWithZeeshu, AuctionNest was born out of a passion for
+            Founded by CodeWithZeeshu, Auction Platform was born out of a passion for
             connecting people with unique and valuable items. With years of
             experience in the auction industry, our team is committed to
             creating a platform that offers an unparalleled auction experience
@@ -97,7 +97,7 @@ const About = () => {
             Join Us
           </h3>
           <p className="text-xl text-stone-600">
-            Whether you're looking to buy, sell, or simply explore, AuctionNest
+            Whether you're looking to buy, sell, or simply explore, Auction Platform
             invites you to join our growing community of auction enthusiasts.
             Discover new opportunities, uncover hidden gems, and experience the
             thrill of winning your next great find.
@@ -105,7 +105,7 @@ const About = () => {
         </div>
         <div>
           <p className="text-[#d6482b] text-xl font-bold mb-3">
-            Thank you for choosing AuctionNest. We look forward to being a part of
+            Thank you for choosing Auction Platform. We look forward to being a part of
             your auction journey!
           </p>
         </div>
