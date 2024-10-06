@@ -109,7 +109,7 @@ const SideDrawer = () => {
                 </Link>
                 <Link
                   to={"/login"}
-                  className="bg-[#D6482B] font-semibold hover:bg-[#b8381e] text-xl py-1 px-3 rounded-md text-white"
+                  className="text-[#91877f] bg-transparent border-2 border-[#91877f] font-semibold  hover:bg-[#b8381e] hover:text-white hover:border-transparent text-xl py-1 px-4 rounded-md"
                 >
                   Login
                 </Link>

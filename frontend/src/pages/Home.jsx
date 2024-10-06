@@ -45,7 +45,7 @@ const Home = () => {
                 </Link>
                 <Link
                   to={"/login"}
-                  className="text-[#DECCBE] bg-transparent border-2 border-[#DECCBE] hover:bg-[#fff3fd] hover:text-[#fdba88] font-bold text-xl  rounded-md px-8 flex items-center py-2 transition-all duration-300"
+                  className="text-[#91877f] bg-transparent border-2 border-[#91877f] hover:bg-[#b8381e] hover:text-white hover:border-transparent font-bold text-xl  rounded-md px-8 flex items-center py-2 transition-all duration-300"
                 >
                   Login
                 </Link>
