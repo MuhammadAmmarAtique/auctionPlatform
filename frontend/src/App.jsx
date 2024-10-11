@@ -5,7 +5,9 @@ import SideDrawer from "./layout/SideDrawer";
 import { getUser } from "./store/slices/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import {
+import { getAllAuctionItems } from "./store/slices/auctionSlice"
+
+import { 
   Home,
   Signup,
   Login,
@@ -19,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getAllAuctionItems())
   }, []);
 
   return (
