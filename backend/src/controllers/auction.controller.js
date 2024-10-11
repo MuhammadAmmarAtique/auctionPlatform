@@ -123,7 +123,7 @@ const getAllAuctionItems = asyncHandler(async (req, res) => {
 
   res
     .status(200)
-    .json(new ApiResponse(200, "Successfully fetched all Auction Items!"));
+    .json(new ApiResponse(200, "Successfully fetched all Auction Items!", allAuctionItems));
 });
 
 const getAuctionItemDetails = asyncHandler(async (req, res) => {
