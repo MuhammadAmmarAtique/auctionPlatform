@@ -1,0 +1,614 @@
+{
+	"info": {
+		"_postman_id": "9fbaf79b-2ca3-4e16-a1d6-4d300be13059",
+		"name": "auctionPlatform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37456517"
+	},
+	"item": [
+		{
+			"name": "healthcheck",
+			"item": [
+				{
+					"name": "healthcheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/healthcheck",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "news",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmesd123@gmail.coms",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "rawalpindi, punjab, pakistan",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "03331234567",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Bidder",
+									"type": "text"
+								},
+								{
+									"key": "profileImg",
+									"type": "file",
+									"src": "/C:/Users/Computer Arena/Desktop/Assets for testing/user/bidder.jpg",
+									"disabled": true
+								},
+								{
+									"key": "bankAccountNumber",
+									"value": "12357446843744",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "bankAccountName",
+									"value": "current account",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "bankName",
+									"value": "Meezan bank",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "easypaisaAccountNumber",
+									"value": "1236437358",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "paypalEmail",
+									"value": "123zyz@gmail.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"email\":\"muhammadammaratique@gmail.com\",\r\n    // \"email\":\"bidderOne@gmail.com\",\r\n    // \"email\":\"bidderTwo@gmail.com\",\r\n    // \"email\":\"superadmin@gmail.com\",\r\n    \"email\":\" new auctioneer@gmail.com\",\r\n     \"password\" :\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logoutUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/logout",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/get-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"get-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshAcessToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sdfsd",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{server}}/users/refreshAcessToken",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"refreshAcessToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/delete-user",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"delete-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchLeaderboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/fetch-Leaderboard",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"fetch-Leaderboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auction",
+			"item": [
+				{
+					"name": "addNewAuctionItem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{server}}/auctions/add-new-auction-Item",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auctions",
+								"add-new-auction-Item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllAuctionItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/auctions/get-All-Auction-Items",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auctions",
+								"get-All-Auction-Items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAuctionItemDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/auctions/getAuctionItemDetails/66e9628fb7dbfb98a8947c2c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auctions",
+								"getAuctionItemDetails",
+								"66e9628fb7dbfb98a8947c2c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuserAuctionItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/auctions/getuserAuctionItems",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auctions",
+								"getuserAuctionItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAuctionItem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/auctions/deleteAuctionItem/66e96e05d62e95e2ceea6a3b",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auctions",
+								"deleteAuctionItem",
+								"66e96e05d62e95e2ceea6a3b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "republishAuctionItem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "newStartTime",
+									"value": "2024-10-18T18:50:00",
+									"type": "text"
+								},
+								{
+									"key": "newEndTime",
+									"value": "2024-10-18T24:00:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/auctions/republishAuctionItem/66f4fd3201554df86098d6ac",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"auctions",
+								"republishAuctionItem",
+								"66f4fd3201554df86098d6ac"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bid",
+			"item": [
+				{
+					"name": "placeBid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "40",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/bids/place-bid/66f4fd3201554df86098d6ac",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"bids",
+								"place-bid",
+								"66f4fd3201554df86098d6ac"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comissionProof",
+			"item": [
+				{
+					"name": "proofOfComission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "450",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "Transfered cmission proof from my easypaisa to your bank account, amazing Platform",
+									"type": "text"
+								},
+								{
+									"key": "paymentProof",
+									"type": "file",
+									"src": "/C:/Users/Computer Arena/Desktop/Assets for testing/comissionProof/cp1.jfif"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/comissionProofs/proofOfComission",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comissionProofs",
+								"proofOfComission"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "superAdmin",
+			"item": [
+				{
+					"name": "deleteAuctionItem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/superAdmins/deleteAuctionItem/66ebc3af57532bff17a11091",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"deleteAuctionItem",
+								"66ebc3af57532bff17a11091"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPaymentProofs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/superAdmins/getAllPaymentProofs",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"getAllPaymentProofs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPaymentProofDetail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/superAdmins/getPaymentProofDetail/66ed878bdd0c0815f8d89a44",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"getPaymentProofDetail",
+								"66ed878bdd0c0815f8d89a44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePaymentProof",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "Approved",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/superAdmins/updatePaymentProof/66ed878bdd0c0815f8d89a44",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"updatePaymentProof",
+								"66ed878bdd0c0815f8d89a44"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Approved",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePaymentProof",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/superAdmins/deletePaymentProof/66ed878bdd0c0815f8d89a44",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"deletePaymentProof",
+								"66ed878bdd0c0815f8d89a44"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRegisteredUserCountByMonth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/superAdmins/getRegisteredUserCountByMonth",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"getRegisteredUserCountByMonth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMonthlyRevenue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/superAdmins/getMonthlyRevenue",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"superAdmins",
+								"getMonthlyRevenue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
