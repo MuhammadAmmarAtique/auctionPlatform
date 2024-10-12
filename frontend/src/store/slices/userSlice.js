@@ -69,7 +69,20 @@ const userSlice = createSlice({
       state.isAuthenticated = false,
       state.user = {};
     },
-    // 5) reducer for clearing errors
+    // 5) fetchLeaderboard reducers
+    fetchLeaderboardRequest(state, action) {
+      state.loading = true;
+      state.leaderboard = [];
+    },
+    fetchLeaderboardSuccess(state, action) {
+      state.loading = false;
+      state.leaderboard = action.payload;
+    },
+    fetchLeaderboardFailed(state, action) {
+      state.loading = false;
+      state.leaderboard = [];
+    },
+    // 6) reducer for clearing errors / Reset Slice
     clearAllErrors(state, action) {
       state.loading = false,
       state.isAuthenticated = state.isAuthenticated,
@@ -165,6 +178,23 @@ export const getUser = () => async (dispatch) => {
   } catch (error) {
     dispatch(userSlice.actions.getUserFailed());
     dispatch(userSlice.actions.clearAllErrors());
+  }
+};
+
+export const fetchLeaderboard = () => async (dispatch) => {
+  dispatch(userSlice.actions.fetchLeaderboardRequest());
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/api/v1/users/fetch-Leaderboard",
+      { withCredentials: true }
+    );
+    console.log("response: ", response.data.data);
+    dispatch(userSlice.actions.fetchLeaderboardSuccess(response.data.data));
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.fetchLeaderboardFailed());
+    dispatch(userSlice.actions.clearAllErrors());
+    console.log(error.response.data.message);
   }
 };
 
