@@ -188,7 +188,6 @@ export const fetchLeaderboard = () => async (dispatch) => {
       "http://localhost:3000/api/v1/users/fetch-Leaderboard",
       { withCredentials: true }
     );
-    console.log("response: ", response.data.data);
     dispatch(userSlice.actions.fetchLeaderboardSuccess(response.data.data));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
