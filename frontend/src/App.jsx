@@ -14,6 +14,7 @@ import {
   SubmitComissionProof,
   HowItWorks,
   About,
+  Leaderboard
 } from "./pages/index";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         />
         <Route path="/how-it-works-info" element={<HowItWorks />} />
         <Route path="/about" element={<About />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
       <ToastContainer position="top-right" />{" "}
       {/* it will shows messages & will always appear */}

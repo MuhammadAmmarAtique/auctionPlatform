@@ -4,5 +4,6 @@ import Login from "./Login";
 import SubmitComissionProof from "./SubmitComissionProof";
 import HowItWorks from "./HowItWorks";
 import About from "./About";
+import Leaderboard from "./Leaderboard"
 
-export { Home, Signup, Login, SubmitComissionProof, HowItWorks, About };
+export { Home, Signup, Login, SubmitComissionProof, HowItWorks, About, Leaderboard };
