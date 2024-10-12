@@ -48,9 +48,9 @@ export const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
   const formatTimeLeft = ({days, hours, minutes, seconds}) => {
      const pad = (num) => String(num).padStart(2,0)
      if (days == 0) {
-      return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}` 
+      return `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s` 
      } else {
-       return `${days}Days ${pad(hours)}:${pad(minutes)}:${pad(seconds)}` 
+       return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s` 
      }
   }
 
