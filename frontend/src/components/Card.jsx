@@ -21,7 +21,7 @@ export const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
       };
     }
 
-    if (endDifference > 0) {
+    else if (endDifference > 0) {
       timeLeft = {
         type: "Auction Ends in:",
         days: Math.floor(endDifference / (1000 * 60 * 60 * 24)),
@@ -46,12 +46,7 @@ export const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
   }, []);
 
   const formatTimeLeft = ({days, hours, minutes, seconds}) => {
-     const pad = (num) => String(num).padStart(2,0)
-     if (days == 0) {
-      return `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s` 
-     } else {
-       return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s` 
-     }
+    return `${days}d ${(hours)}h ${(minutes)}m ${(seconds)}s`  
   }
 
   return (
