@@ -273,15 +273,7 @@ const fetchLeaderboard = asyncHandler(async (req, res) => {
   const leaders = users.sort((a, b) => b.moneySpent - a.moneySpent);
 
   if (leaders.length === 0) {
-    res
-      .status(200)
-      .json(
-        new ApiResponse(
-          200,
-          "No bidder has spend money on any auction!",
-          leaders
-        )
-      );
+    throw new ApiError(500,"No bidder has spend money on any auction or No leaders found" )
   }
 
   res
