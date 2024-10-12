@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
+const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
   const CalculateTimeLeft = () => {
     const currentTime = new Date();
 
@@ -87,3 +87,5 @@ export const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
 </>
   );
 };
+
+export default Card;
