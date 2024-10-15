@@ -143,7 +143,7 @@ const getAuctionItemDetails = asyncHandler(async (req, res) => {
       new ApiResponse(
         200,
         "Successfully fetched auction item details with its bidders in ascending order",
-        { "auctionItemDetails:::": auctionItemDetails, "bidders:::": bidders }
+        {  auctionItemDetails,  bidders }
       )
     );
 });
