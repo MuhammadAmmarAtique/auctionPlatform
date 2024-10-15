@@ -9,7 +9,7 @@ const auctionSlice = createSlice({
     itemDetail: {},
     auctionDetail: {},
     auctionBidders: {},
-    myAuctions: [],
+    userAuctions: [],
     allAuctions: [],
   },
   reducers: {
@@ -24,7 +24,18 @@ const auctionSlice = createSlice({
     getAllAuctionItemsFailed(state,action){
         state.loading = false
     },
-    // 2) reducer for clearing errors/ Reset slice
+    //  #2 Get User Auction items Reducers
+    getUserAuctionItemsRequest(state,action){
+       state.loading= true;
+    },
+    getUserAuctionItemsSuccess(state,action){
+      state.loading = false;
+      state.userAuctions = action.payload;
+    },
+    getUserAuctionItemsFailed(state,action){
+      state.loading = false;
+    },
+    // 3) reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
         state.loading = false,
         state.itemDetail = state.itemDetail,
@@ -49,6 +60,24 @@ export const getAllAuctionItems = () => async (dispatch) => {
     dispatch(auctionSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(auctionSlice.actions.getAllAuctionItemsFailed());
+    console.log(error.response.data.message);
+    dispatch(auctionSlice.actions.clearAllErrors());
+  }
+};
+
+export const getUserAuctionItems = () => async (dispatch) => {
+  dispatch(auctionSlice.actions.getUserAuctionItemsRequest());
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/api/v1/auctions/getuserAuctionItems",
+      { withCredentials: true }
+    );
+    dispatch(
+      auctionSlice.actions.getUserAuctionItemsSuccess(response.data.data)
+    );
+    dispatch(auctionSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(auctionSlice.actions.getUserAuctionItemsFailed());
     console.log(error.response.data.message);
     dispatch(auctionSlice.actions.clearAllErrors());
   }
