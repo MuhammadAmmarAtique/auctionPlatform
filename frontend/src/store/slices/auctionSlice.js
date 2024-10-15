@@ -6,8 +6,7 @@ const auctionSlice = createSlice({
   name: "auction",
   initialState: {
     loading: false,
-    itemDetail: {},
-    auctionDetail: {},
+    auctionItemDetail: {},
     auctionBidders: {},
     userAuctions: [],
     allAuctions: [],
@@ -41,7 +40,7 @@ const auctionSlice = createSlice({
     },
     getAuctionItemDetailsSuccess(state,action){
       state.loading = false;
-      state.auctionDetail = action.payload.auctionItemDetails;
+      state.auctionItemDetail = action.payload.auctionItemDetails;
       state.auctionBidders = action.payload.bidders;
     },
     getAuctionItemDetailsFailed(state,action){
@@ -51,7 +50,6 @@ const auctionSlice = createSlice({
     //reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
         state.loading = false,
-        state.itemDetail = state.itemDetail,
         state.auctionDetail = state.auctionDetail,
         state.auctionBidders = state.auctionBidders;
         state.myAuctions = state.myAuctions;
@@ -97,17 +95,21 @@ export const getUserAuctionItems = () => async (dispatch) => {
 };
 
 export const getAuctionItemDetails = (id) => async (dispatch) => {
- dispatch(auctionSlice.actions.getAuctionItemDetailsRequest())
- try {
-  const response = axios.get(`http://localhost:3000/api/v1/auctions/getAuctionItemDetails/${id}`, {withCredentials: true})
-  dispatch(auctionSlice.actions.getAllAuctionItemsSuccess(response.data.data));
-  dispatch(auctionSlice.actions.clearAllErrors());
-
- } catch (error) {
-  dispatch(auctionSlice.actions.getAllAuctionItemsFailed());
-  dispatch(auctionSlice.actions.clearAllErrors());
-  console.log(error.response.data.message);
- }
-}
+  dispatch(auctionSlice.actions.getAuctionItemDetailsRequest());
+  try {
+    const response = axios.get(
+      `http://localhost:3000/api/v1/auctions/getAuctionItemDetails/${id}`,
+      { withCredentials: true }
+    );
+    dispatch(
+      auctionSlice.actions.getAllAuctionItemsSuccess(response.data.data)
+    );
+    dispatch(auctionSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(auctionSlice.actions.getAllAuctionItemsFailed());
+    dispatch(auctionSlice.actions.clearAllErrors());
+    console.log(error.response.data.message);
+  }
+};
 
 export default auctionSlice.reducer;
