@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import {getAuctionItemDetails} from "./auctionSlice"
+import axios from "axios";
 
 const bidSlice = createSlice({
   name: "bid",
@@ -33,7 +34,7 @@ export const placeBid = (id, data) => async (dispatch) => {
     );
     dispatch(bidSlice.actions.placeBidSuccess());
     dispatch(getAuctionItemDetails(id));
-    toast.success(response.data.data.message);
+    toast.success(response.data.message);
   } catch (error) {
     dispatch(bidSlice.actions.placeBidFailed());
     toast.error(error.response.data.message);
