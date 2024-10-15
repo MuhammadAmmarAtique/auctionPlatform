@@ -150,6 +150,7 @@ export const addNewAuctionItem = (data) => async (dispatch) => {
       data,
       {
         withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
       }
     );
     toast.success(response.data.data.message);
@@ -171,6 +172,7 @@ export const republishAuctionItem = (id, data) => async (dispatch) => {
       data,
       {
         withCredentials: true,
+        headers: { "Content-Type": "application/json" },
       }
     );
     dispatch(auctionSlice.actions.republishAuctionItemSuccess());
