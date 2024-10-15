@@ -133,7 +133,7 @@ const getAuctionItemDetails = asyncHandler(async (req, res) => {
   });
 
   if (!auctionItemDetails) {
-    throw new ApiError(500, "No auction itek found in database!");
+    throw new ApiError(500, "No auction item found in database!");
   }
   const bidders = auctionItemDetails.bids.sort((a, b) => b.amount - a.amount);
 
