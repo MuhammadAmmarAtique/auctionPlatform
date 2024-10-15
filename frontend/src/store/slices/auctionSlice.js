@@ -45,12 +45,22 @@ const auctionSlice = createSlice({
     },
     getAuctionItemDetailsFailed(state,action){
       state.loading = false;
-      state.auctionDetail = {};
+      state.auctionItemDetail = {};
+    },
+    // #4 Add new Auction Item Reducers
+    addNewAuctionItemRequest(state,action){
+      state.loading = true;
+    },
+    addNewAuctionItemSuccess(state,action){
+      state.loading = false;
+    },
+    addNewAuctionItemFailed(state,action){
+      state.loading = false;
     },
     //reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
         state.loading = false,
-        state.auctionDetail = state.auctionDetail,
+        state.auctionItemDetail = state.auctionItemDetail,
         state.auctionBidders = state.auctionBidders;
         state.myAuctions = state.myAuctions;
         state.allAuctions = state.allAuctions;
@@ -109,6 +119,26 @@ export const getAuctionItemDetails = (id) => async (dispatch) => {
     dispatch(auctionSlice.actions.getAllAuctionItemsFailed());
     dispatch(auctionSlice.actions.clearAllErrors());
     console.log(error.response.data.message);
+  }
+};
+
+export const addNewAuctionItem = (data) => async (dispatch) => {
+  dispatch(auctionSlice.actions.addNewAuctionItemRequest());
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/v1/auctions/add-new-auction-Item",
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    toast.success(response.data.data.message);
+    dispatch(auctionSlice.actions.addNewAuctionItemSuccess());
+    dispatch(auctionSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(auctionSlice.actions.addNewAuctionItemFailed());
+    toast.error(error.response.data.message);
+    dispatch(auctionSlice.actions.clearAllErrors());
   }
 };
 
