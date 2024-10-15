@@ -82,7 +82,7 @@ const auctionSlice = createSlice({
         state.loading = false,
         state.auctionItemDetail = state.auctionItemDetail,
         state.auctionBidders = state.auctionBidders;
-        state.myAuctions = state.myAuctions;
+        state.userAuctions = state.userAuctions;
         state.allAuctions = state.allAuctions;
     }
 },
@@ -127,16 +127,16 @@ export const getUserAuctionItems = () => async (dispatch) => {
 export const getAuctionItemDetails = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.getAuctionItemDetailsRequest());
   try {
-    const response = axios.get(
+    const response = await axios.get(
       `http://localhost:3000/api/v1/auctions/getAuctionItemDetails/${id}`,
       { withCredentials: true }
     );
     dispatch(
-      auctionSlice.actions.getAllAuctionItemsSuccess(response.data.data)
+      auctionSlice.actions.getAuctionItemDetailsSuccess(response.data.data)
     );
     dispatch(auctionSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(auctionSlice.actions.getAllAuctionItemsFailed());
+    dispatch(auctionSlice.actions.getAuctionItemDetailsFailed());
     dispatch(auctionSlice.actions.clearAllErrors());
     console.log(error.response.data.message);
   }
