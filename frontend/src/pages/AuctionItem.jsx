@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getAuctionItemDetails } from "../store/slices/auctionSlice";
 import { placeBid } from "../store/slices/bidSlice";
-import Spinner from "../components/Spinner"
+import Spinner from "../components/Spinner";
 import { FaGreaterThan } from "react-icons/fa";
 import { RiAuctionFill } from "react-icons/ri";
 
@@ -11,7 +11,7 @@ const AuctionItem = () => {
   const { id } = useParams();
   const { loading, auctionItemDetail, auctionBidders } = useSelector(
     (state) => state.auction
-  );  
+  );
 
   const { isAuthenticated } = useSelector((state) => state.user);
 
@@ -91,13 +91,15 @@ const AuctionItem = () => {
               </p>
               <hr className="my-2 border-t-[1px] border-t-stone-700" />
               {auctionItemDetail.description &&
-                auctionItemDetail.description.split(". ").map((element, index) => {
-                  return (
-                    <li key={index} className="text-[18px] my-2">
-                      {element}
-                    </li>
-                  );
-                })}
+                auctionItemDetail.description
+                  .split(". ")
+                  .map((element, index) => {
+                    return (
+                      <li key={index} className="text-[18px] my-2">
+                        {element}
+                      </li>
+                    );
+                  })}
             </div>
             {/* b) Bidds */}
             <div className="flex-1">
@@ -126,27 +128,25 @@ const AuctionItem = () => {
                             </p>
                           </div>
                           {index === 0 ? (
-                           <>
-                            <p>{`${element.amount} PKR`}</p>
-                            <p className="text-[20px] font-semibold text-green-600">
-                              1st
-                            </p>
-                           </>
+                            <>
+                              <p>{`${element.amount} PKR`}</p>
+                              <p className="text-[20px] font-semibold text-green-600">
+                                1st
+                              </p>
+                            </>
                           ) : index === 1 ? (
                             <>
-                            <p>{`${element.amount} PKR`}</p>
-
-                             <p className="text-[20px] font-semibold text-blue-600">
-                              2nd
-                            </p>
+                              <p>{`${element.amount} PKR`}</p>
+                              <p className="text-[20px] font-semibold text-blue-600">
+                                2nd
+                              </p>
                             </>
-                           
                           ) : index === 2 ? (
                             <>
-                            <p>{`${element.amount} PKR`}</p>
-                            <p className="text-[20px] font-semibold text-yellow-600">
-                              3rd
-                            </p>
+                              <p>{`${element.amount} PKR`}</p>
+                              <p className="text-[20px] font-semibold text-yellow-600">
+                                3rd
+                              </p>
                             </>
                           ) : (
                             <p className="text-[20px] font-semibold text-gray-600">
