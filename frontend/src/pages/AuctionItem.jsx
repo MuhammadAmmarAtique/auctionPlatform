@@ -18,13 +18,14 @@ const AuctionItem = () => {
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
 
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
 
   const handleBid = () => {
     const formData = new FormData();
     formData.append("amount", amount);
     dispatch(placeBid(id, formData));
     dispatch(getAuctionItemDetails(id));
+    setAmount("")
   };
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const AuctionItem = () => {
                     </span>
                   </p>
                   <p className="text-xl font-semibold">
-                    Minimum Bid:{" "}
+                    Starting Bid:{" "}
                     <span className="text-[#D6482B]">
                       Rs.{auctionItemDetail.startingBid}
                     </span>
