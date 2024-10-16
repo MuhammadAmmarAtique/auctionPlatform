@@ -37,17 +37,17 @@ export const placeBid = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Must Enter valid amount for placing bid!");
   }
 
+  if (auction.currentBid > 0 && amount < auction.currentBid + 500) {
+    throw new ApiError(
+      400,
+      `Bid amount must be greater then Current Bid by atleast rupees 500 i.e ${auction.currentBid + 500} `
+    );
+  }
+
   if (amount <= auction.startingBid) {
     throw new ApiError(
       400,
       `Bid amount must be greater then Starting Bid i.e ${auction.startingBid} `
-    );
-  }
-
-  if (auction.currentBid > 0 && amount <= auction.currentBid) {
-    throw new ApiError(
-      400,
-      `Bid amount must be greater then Current Bid by atleast rupees 500 i.e ${auction.currentBid + 500} `
     );
   }
 
