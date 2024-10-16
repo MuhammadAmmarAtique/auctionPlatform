@@ -17,6 +17,10 @@ const Auctions = () => {
             >
               Auctions
             </h1>
+            <p className="text-xl mb-8">
+              Discover and bid on a variety of exclusive items, where every
+              Auction is a chance to win big.
+            </p>
             <div className="flex flex-wrap gap-6">
               {allAuctions.map((element) => (
                 <Card

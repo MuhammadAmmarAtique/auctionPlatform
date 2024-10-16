@@ -11,13 +11,17 @@ const Leaderboard = () => {
           <Spinner />
         ) : (
           <>
-            <div className="flex flex-col min-[340px]:flex-row min-[340px]:gap-2 mb-5">
+            <div className="flex flex-col min-[340px]:flex-row min-[340px]:gap-2">
               <h1
                 className={`text-[#D6482B] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
               >
                 Bidders Leaderboard
               </h1>
             </div>
+            <p className="text-xl mb-5">
+              Explore the top bidders and see who’s leading the competition with
+              the highest bids.
+            </p>
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white border my-5 border-gray-300">
                 <thead>
