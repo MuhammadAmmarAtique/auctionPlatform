@@ -45,9 +45,24 @@ const Card = ({imgSrc,title,startingBid,startTime,endTime,id,}) => {
     return () => clearInterval(timer);
   }, []);
 
-  const formatTimeLeft = ({days, hours, minutes, seconds}) => {
-    return `${days}d ${(hours)}h ${(minutes)}m ${(seconds)}s`  
-  }
+  const formatTimeLeft = ({ days, hours, minutes, seconds }) => {
+    let formattedTime = '';
+  
+    if (days) {
+      formattedTime += `${days}d `;
+    }
+    if (hours) {
+      formattedTime += `${hours}h `;
+    }
+    if (minutes) {
+      formattedTime += `${minutes}m `;
+    }
+    if (seconds || (!days && !hours && !minutes)) {
+      formattedTime += `${seconds}s`;
+    }
+  
+    return formattedTime.trim(); 
+  };
 
   return (
      <>
