@@ -22,14 +22,14 @@ const SubmitComissionProof = () => {
     formdata.append("amount", amount);
     formdata.append("comment", comment);
     formdata.append("paymentProof", paymentProof);
-    dispatch(submitComissionProof(formdata));
-
-    //clearing form after submission
-    if (amount && comment && paymentProof) {
-      setAmount("");
-      setComment("");
-      setPaymentProof("");
-    }
+    dispatch(submitComissionProof(formdata))
+    .then((response) => { // clearing form after successfull form submission
+      if (response.status == 200) {
+        setAmount("");
+        setComment("");
+        setPaymentProof("");
+      }
+    });
   };
 
   return (

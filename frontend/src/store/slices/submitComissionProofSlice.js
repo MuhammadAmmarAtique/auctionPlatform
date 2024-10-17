@@ -33,9 +33,11 @@ export const submitComissionProof = (data) => async (dispatch) => {
     );
     dispatch(submitComissionProofSlice.actions.submitComissionProofSuccess());
     toast.success(response.data.message);
+    return response;
   } catch (error) {
     dispatch(submitComissionProofSlice.actions.submitComissionProofFailed());
     toast.error(error.response.data.message);
+    return error; 
   }
 };
 
