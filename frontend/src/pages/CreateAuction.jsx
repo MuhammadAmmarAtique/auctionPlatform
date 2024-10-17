@@ -31,7 +31,20 @@ const CreateAuction = () => {
     formData.append("startTime", startTime);
     formData.append("endTime", endTime);
     formData.append("auctionItemImage", auctionItemImage);
-    dispatch(addNewAuctionItem(formData));
+    dispatch(addNewAuctionItem(formData))
+    .then((response) => { // Resetting the form fields upon receiving a successful response
+      if (response.status === 200) {
+        setTitle("");
+        setDescription("");
+        setStartingBid(0);
+        setCategory("");
+        setCondition("");
+        setStartTime("");
+        setEndTime("");
+        setAuctionItemImage("");
+        setAuctionItemImgPreview("");
+      }
+    });
   }
 
   function auctionImgHandler(e) {
