@@ -153,7 +153,7 @@ export const addNewAuctionItem = (data) => async (dispatch) => {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    toast.success(response.data.data.message);
+    toast.success(response.data.message);
     dispatch(auctionSlice.actions.addNewAuctionItemSuccess());
     dispatch(getAllAuctionItems())
     dispatch(auctionSlice.actions.clearAllErrors());
@@ -176,7 +176,7 @@ export const republishAuctionItem = (id, data) => async (dispatch) => {
       }
     );
     dispatch(auctionSlice.actions.republishAuctionItemSuccess());
-    toast.success(response.data.data.message);
+    toast.success(response.data.message);
     dispatch(getUserAuctionItems());
     dispatch(getAllAuctionItems());
     dispatch(auctionSlice.actions.republishAuctionItemSuccess());
@@ -198,7 +198,7 @@ export const deleteAuctionItem = (id) => async (dispatch) => {
       }
     );
     dispatch(auctionSlice.actions.deleteAuctionItemSuccess());
-    toast.success(response.data.data.message);
+    toast.success(response.data.message);
     dispatch(getAllAuctionItems());
     dispatch(auctionSlice.actions.clearAllErrors());
   } catch (error) {
