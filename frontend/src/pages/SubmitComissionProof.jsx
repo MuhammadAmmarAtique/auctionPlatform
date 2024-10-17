@@ -11,9 +11,9 @@ const SubmitComissionProof = () => {
   const { loading } = useSelector((state) => state.submitComissionProof);
 
   const paymentProofImgHandler = (e) => {
-    const file = e.target.files[0]
-    setPaymentProof(file)
-  }
+    const file = e.target.files[0];
+    setPaymentProof(file);
+  };
 
   const handleSubmitComissionProof = (e) => {
     e.preventDefault();
@@ -25,22 +25,31 @@ const SubmitComissionProof = () => {
     dispatch(submitComissionProof(formdata));
 
     //clearing form after submission
-    if (amount && comment && paymentProof ) {
-      setAmount("")
-      setComment("")
-      setPaymentProof("")
-    } 
+    if (amount && comment && paymentProof) {
+      setAmount("");
+      setComment("");
+      setPaymentProof("");
+    }
   };
 
   return (
     <>
       <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-start">
+        <div className=" mb-5">
+          <h1
+            className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
+          >
+            Upload Payment Proof
+          </h1>
+          <p className="text-xl">
+            Please upload a valid payment proof for verification.
+          </p>
+        </div>
         <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
           <form
             className="flex flex-col gap-5 w-full"
             onSubmit={handleSubmitComissionProof}
           >
-            <h3 className={`text-[#D6482B] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}>Upload Payment Proof</h3>
             <div className="flex flex-col gap-2">
               <label className="text-[16px] text-stone-500">Amount</label>
               <input
@@ -69,12 +78,12 @@ const SubmitComissionProof = () => {
                 className="text-[16px] py-2 bg-transparent border-[1px] rounded-md px-1 border-stone-500 focus:outline-none"
               />
             </div>
-              <button
-                className="bg-[#d6482b] mx-auto font-semibold hover:bg-[#b8381e] text-xl transition-all duration-300 py-2 px-4 rounded-md text-white my-4"
-                type="submit"
-              >
-                {loading ? "Uploading..." : "Upload Payment Proof"}
-              </button>
+            <button
+              className="bg-[#d6482b] mx-auto font-semibold hover:bg-[#b8381e] text-xl transition-all duration-300 py-2 px-4 rounded-md text-white my-4"
+              type="submit"
+            >
+              {loading ? "Uploading..." : "Upload Payment Proof"}
+            </button>
           </form>
         </div>
       </section>

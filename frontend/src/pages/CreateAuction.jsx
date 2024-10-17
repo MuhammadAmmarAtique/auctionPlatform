@@ -69,11 +69,17 @@ const CreateAuction = () => {
 
   return (
     <article className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col">
-      <h1
-        className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-      >
-        Create Auction
-      </h1>
+      <div className="mb-5">
+        <h1
+          className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
+        >
+          Create Auction
+        </h1>
+        <p className="text-xl">
+          Provide the necessary details to launch your auction and attract
+          potential bidders.
+        </p>
+      </div>
       <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
         <form
           className="flex flex-col gap-5 w-full"
@@ -165,9 +171,9 @@ const CreateAuction = () => {
                 selected={endTime}
                 onChange={(date) => setEndTime(date)}
                 showTimeSelect
-                timeFormat="hh:mm aa" 
-                timeIntervals={15} 
-                dateFormat="MMMM d, yyyy h:mm aa" 
+                timeFormat="hh:mm aa"
+                timeIntervals={15}
+                dateFormat="MMMM d, yyyy h:mm aa"
                 className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none w-full"
               />
             </div>
