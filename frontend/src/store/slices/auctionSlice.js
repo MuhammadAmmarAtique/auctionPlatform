@@ -157,10 +157,12 @@ export const addNewAuctionItem = (data) => async (dispatch) => {
     dispatch(auctionSlice.actions.addNewAuctionItemSuccess());
     dispatch(getAllAuctionItems())
     dispatch(auctionSlice.actions.clearAllErrors());
+    return response;
   } catch (error) {
     dispatch(auctionSlice.actions.addNewAuctionItemFailed());
     toast.error(error.response.data.message);
     dispatch(auctionSlice.actions.clearAllErrors());
+    return error;
   }
 };
 
