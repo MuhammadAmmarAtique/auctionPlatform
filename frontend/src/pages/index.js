@@ -7,5 +7,6 @@ import About from "./About";
 import Leaderboard from "./Leaderboard"
 import Auctions from "./Auctions"
 import AuctionItem from "./AuctionItem"
+import CreateAuction from "./CreateAuction"
 
-export { Home, Signup, Login, SubmitComissionProof, HowItWorks, About, Leaderboard, Auctions, AuctionItem };
+export { Home, Signup, Login, SubmitComissionProof, HowItWorks, About, Leaderboard, Auctions, AuctionItem, CreateAuction };

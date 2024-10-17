@@ -16,7 +16,8 @@ import {
   About,
   Leaderboard,
   Auctions,
-  AuctionItem
+  AuctionItem,
+  CreateAuction
 } from "./pages/index";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/auctions" element={<Auctions />} />
         <Route path="/auction/item/:id" element={<AuctionItem />} />
+        <Route path="/create-auction" element={<CreateAuction />} />
       </Routes>
       <ToastContainer position="top-right" />{" "}
       {/* it will shows messages & will always appear */}
