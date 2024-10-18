@@ -169,7 +169,7 @@ export const addNewAuctionItem = (data) => async (dispatch) => {
 export const republishAuctionItem = (id, data) => async (dispatch) => {
   dispatch(auctionSlice.actions.republishAuctionItemRequest());
   try {
-    const response = axios.put(
+    const response = await axios.put(
       `http://localhost:3000/api/v1/auctions/republishAuctionItem/${id}`,
       data,
       {
@@ -181,7 +181,6 @@ export const republishAuctionItem = (id, data) => async (dispatch) => {
     toast.success(response.data.message);
     dispatch(getUserAuctionItems());
     dispatch(getAllAuctionItems());
-    dispatch(auctionSlice.actions.republishAuctionItemSuccess());
     dispatch(auctionSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(auctionSlice.actions.republishAuctionItemFailed());
@@ -202,6 +201,7 @@ export const deleteAuctionItem = (id) => async (dispatch) => {
     dispatch(auctionSlice.actions.deleteAuctionItemSuccess());
     toast.success(response.data.message);
     dispatch(getAllAuctionItems());
+    dispatch(getUserAuctionItems());
     dispatch(auctionSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(auctionSlice.actions.deleteAuctionItemFailed());
