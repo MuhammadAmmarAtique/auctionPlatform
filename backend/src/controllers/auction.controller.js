@@ -53,6 +53,10 @@ const addNewAuctionItem = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Auction start time must be less then end time!");
   }
   // c)
+  if (new Date(startTime) === new Date(endTime)) {
+    throw new ApiError(400, "Auction end time must be greater then auction start time!");
+  }
+  // c)
   const existedAuction = await Auction.findOne({
     createdBy: req.user._id,
     endTime: { $gt: `${Date.now()}` },
