@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const CreateAuction = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [startingBid, setStartingBid] = useState(0);
+  const [startingBid, setStartingBid] = useState("");
   const [category, setCategory] = useState("");
   const [condition, setCondition] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -36,7 +36,7 @@ const CreateAuction = () => {
       if (response.status === 200) {
         setTitle("");
         setDescription("");
-        setStartingBid(0);
+        setStartingBid("");
         setCategory("");
         setCondition("");
         setStartTime("");
