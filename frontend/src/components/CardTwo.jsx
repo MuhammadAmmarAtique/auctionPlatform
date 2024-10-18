@@ -46,7 +46,7 @@ export const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) 
 
     // stopping setInterval() when CardTwo.jsx is unmounted or no longer used
     return () => clearInterval(timer);
-  }, []);
+  }, [startTime,endTime]);
 
   const formatTimeLeft = ({ days, hours, minutes, seconds }) => {
     let formattedTime = "";
