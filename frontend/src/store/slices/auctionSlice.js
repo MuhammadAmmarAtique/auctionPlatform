@@ -65,7 +65,7 @@ const auctionSlice = createSlice({
       state.loading = false;
     },
     republishAuctionItemFailed(state,action){
-      state.loading = true;
+      state.loading = false;
     },
     // #6 Delete Auction item reducers
     deleteAuctionItemRequest(state,action){
@@ -200,8 +200,8 @@ export const deleteAuctionItem = (id) => async (dispatch) => {
     );
     dispatch(auctionSlice.actions.deleteAuctionItemSuccess());
     toast.success(response.data.message);
-    dispatch(getAllAuctionItems());
     dispatch(getUserAuctionItems());
+    dispatch(getAllAuctionItems());
     dispatch(auctionSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(auctionSlice.actions.deleteAuctionItemFailed());
