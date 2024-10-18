@@ -27,7 +27,7 @@ const ViewMyAuctions = () => {
         >
           My Auctions
         </h1>
-        <p className="text-xl mb-5">Manage your auctions: view, delete, or republish them effortlessly.</p>
+        {userAuctions.length > 0 && <p className="text-xl mb-5">Manage your auctions: view, delete, or republish them effortlessly.</p> }
         {loading ? (
           <Spinner />
         ) : (
