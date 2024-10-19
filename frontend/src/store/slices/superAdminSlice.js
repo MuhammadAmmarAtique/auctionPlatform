@@ -8,6 +8,8 @@ const superAdminSlice = createSlice({
     loading: false,
     allPaymentProofs: [],
     paymentProofDetail: {},
+    biddersRegisteredInEachMonth: [],
+    auctioneersRegisteredInEachMonth: [],
   },
   reducers: {
     // #1 Delete Auction item reducers
@@ -60,6 +62,18 @@ const superAdminSlice = createSlice({
       state.loading = false;
     },
     deletePaymentProofFailed(state, action) {
+      state.loading = false;
+    },
+    // #6 Get Registered User Count By Month reducers
+    getRegisteredUserCountByMonthRequest(state, action) {
+      state.loading = true;
+    },
+    getRegisteredUserCountByMonthSuccess(state, action) {
+      state.loading = false;
+      state.biddersRegisteredInEachMonth = action.payload.biddersRegisteredInEachMonth;
+      state.auctioneersRegisteredInEachMonth = action.payload.auctioneersRegisteredInEachMonth;
+    },
+    getRegisteredUserCountByMonthFailed(state, action) {
       state.loading = false;
     },
 
@@ -171,6 +185,29 @@ export const deletePaymentProof = (id) => async (dispatch) => {
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.deletePaymentProofFailed());
+    toast.error(error.response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  }
+};
+
+export const getRegisteredUserCountByMonth = () => async (dispatch) => {
+  dispatch(superAdminSlice.actions.getRegisteredUserCountByMonthRequest());
+  try {
+    const response = axios.get(
+      `http://localhost:3000/api/v1/superAdmins/getRegisteredUserCountByMonth`,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(
+      superAdminSlice.actions.getRegisteredUserCountByMonthSuccess(
+        response.data.data
+      )
+    );
+    toast.success(response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(superAdminSlice.actions.getRegisteredUserCountByMonthFailed());
     toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   }
