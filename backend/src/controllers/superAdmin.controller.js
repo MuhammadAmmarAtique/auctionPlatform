@@ -221,6 +221,10 @@ const getMonthlyRevenue = asyncHandler(async (req, res) => {
     },
   ]);
 
+  if (paymentsReceived.length === 0) {
+    throw new ApiError(400, "Auction Platform doensot have any earnings yet!")
+  }
+
   const transformData = (data, months = 12) => {
     let result = Array(months).fill(0);
 
