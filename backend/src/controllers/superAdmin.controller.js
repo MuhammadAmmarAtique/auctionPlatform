@@ -28,9 +28,15 @@ const getAllPaymentProofs = asyncHandler(async (req, res) => {
     throw new ApiError(200, "No payment proofs exist or found in database");
   }
 
-  res.status(200).json(
-    new ApiResponse(200, "Successfully fetched all payment prooofs!", AllPaymentProofs)
-  );
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        "Successfully fetched all payment prooofs!",
+        AllPaymentProofs
+      )
+    );
 });
 
 const getPaymentProofDetail = asyncHandler(async (req, res) => {
@@ -187,15 +193,15 @@ const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
       200,
       "Successfully fetched Users data and Transformed them into a Array showing in which month how many users are registered!",
       {
-         biddersRegisteredInEachMonth,
-          auctioneersRegisteredInEachMonth,
+        biddersRegisteredInEachMonth,
+        auctioneersRegisteredInEachMonth,
       }
     )
   );
 });
 
 const getMonthlyRevenue = asyncHandler(async (req, res) => {
-  const paymentsReceived  = await Commission.aggregate([
+  const paymentsReceived = await Commission.aggregate([
     {
       $group: {
         _id: {
@@ -225,18 +231,17 @@ const getMonthlyRevenue = asyncHandler(async (req, res) => {
     return result;
   };
 
-  const monthlyRevenue =  transformData(paymentsReceived)
+  const monthlyRevenue = transformData(paymentsReceived);
 
   res.status(200).json(
     new ApiResponse(
       200,
       "Successfully fetched Monthly Revenue and Transformed it into a Array showing how much Super Admin earned per month!",
       {
-        "Monthly Revenue:::": monthlyRevenue
+        monthlyRevenue,
       }
     )
   );
-
 });
 
 export {
