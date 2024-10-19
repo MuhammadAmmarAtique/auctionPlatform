@@ -6,7 +6,8 @@ const superAdminSlice = createSlice({
   name: "superAdmin",
   initialState: {
     loading: false,
-    AllPaymentProofs : []
+    allPaymentProofs: [],
+    paymentProofDetail: {},
   },
   reducers: {
     // #1 Delete Auction item reducers
@@ -25,11 +26,23 @@ const superAdminSlice = createSlice({
     },
     getAllPaymentProofsSuccess(state, action) {
       state.loading = false;
-      state.AllPaymentProofs = action.payload;
+      state.allPaymentProofs = action.payload;
     },
     getAllPaymentProofsFailed(state, action) {
       state.loading = false;
     },
+    // #2 Get payment Proof Detail reducers
+    getPaymentProofDetailRequest(state, action) {
+      state.loading = true;
+    },
+    getPaymentProofDetailSuccess(state, action) {
+      state.loading = false;
+      state.paymentProofDetail = action.payload;
+    },
+    getPaymentProofDetailFailed(state, action) {
+      state.loading = false;
+    },
+
     //reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
       state.loading = false;
@@ -61,17 +74,40 @@ export const deleteAuctionItem = (id) => async (dispatch) => {
 export const getAllPaymentProofs = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.getAllPaymentProofsRequest());
   try {
-    const response = axios.delete(
+    const response = axios.get(
       `http://localhost:3000/api/v1/superAdmins/getAllPaymentProofs`,
       {
         withCredentials: true,
       }
     );
-    dispatch(superAdminSlice.actions.getAllPaymentProofsSuccess(response.data.data));
+    dispatch(
+      superAdminSlice.actions.getAllPaymentProofsSuccess(response.data.data)
+    );
     toast.success(response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.getAllPaymentProofsFailed());
+    toast.error(error.response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  }
+};
+
+export const getPaymentProofDetail = (id) => async (dispatch) => {
+  dispatch(superAdminSlice.actions.getPaymentProofDetailRequest());
+  try {
+    const response = axios.get(
+      `http://localhost:3000/api/v1/superAdmins/getPaymentProofDetail/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(
+      superAdminSlice.actions.getPaymentProofDetailSuccess(response.data.data)
+    );
+    toast.success(response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(superAdminSlice.actions.getPaymentProofDetailFailed());
     toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   }
