@@ -22,7 +22,7 @@ const isAuthenticated = async (req, res, next) => {
   }
 };
 
-const isAuthorized = (...roles) => {
+const isAuthorized = (roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       next(

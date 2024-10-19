@@ -35,7 +35,7 @@ router.get(
 router.delete(
   "/deleteAuctionItem/:auctionItemId",
   isAuthenticated,
-  isAuthorized("Auctioneer"),
+  isAuthorized("Auctioneer Super Admin"),
   deleteAuctionItem
 );
 router.put(
