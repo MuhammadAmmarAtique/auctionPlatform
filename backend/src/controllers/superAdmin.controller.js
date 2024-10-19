@@ -29,9 +29,7 @@ const getAllPaymentProofs = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json(
-    new ApiResponse(200, "Successfully fetched all payment prooofs!", {
-      "AllPaymentProofs:": AllPaymentProofs,
-    })
+    new ApiResponse(200, "Successfully fetched all payment prooofs!", AllPaymentProofs)
   );
 });
 
