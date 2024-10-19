@@ -31,7 +31,7 @@ const superAdminSlice = createSlice({
     getAllPaymentProofsFailed(state, action) {
       state.loading = false;
     },
-    // #2 Get payment Proof Detail reducers
+    // #3 Get payment Proof Detail reducers
     getPaymentProofDetailRequest(state, action) {
       state.loading = true;
     },
@@ -42,10 +42,22 @@ const superAdminSlice = createSlice({
     getPaymentProofDetailFailed(state, action) {
       state.loading = false;
     },
+    // #4 Update Auctioneer Payment Proof reducers
+    updatePaymentProofRequest(state, action) {
+      state.loading = true;
+    },
+    updatePaymentProofSuccess(state, action) {
+      state.loading = false;
+    },
+    updatePaymentProofFailed(state, action) {
+      state.loading = false;
+    },
 
     //reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
       state.loading = false;
+      state.allPaymentProofs = state.allPaymentProofs;
+      state.paymentProofDetail = state.paymentProofDetail;
     },
   },
 });
@@ -108,6 +120,27 @@ export const getPaymentProofDetail = (id) => async (dispatch) => {
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.getPaymentProofDetailFailed());
+    toast.error(error.response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  }
+};
+
+export const updatePaymentProof = (id, data) => async (dispatch) => {
+  dispatch(superAdminSlice.actions.updatePaymentProofRequest());
+  try {
+    const response = axios.put(
+      `http://localhost:3000/api/v1/superAdmins/updatePaymentProof/${id}`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(superAdminSlice.actions.updatePaymentProofSuccess());
+    dispatch(getAllPaymentProofs());
+    toast.success(response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(superAdminSlice.actions.updatePaymentProofFailed());
     toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   }
