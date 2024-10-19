@@ -52,6 +52,16 @@ const superAdminSlice = createSlice({
     updatePaymentProofFailed(state, action) {
       state.loading = false;
     },
+    // #5 Delete Payment Proof reducers
+    deletePaymentProofRequest(state, action) {
+      state.loading = true;
+    },
+    deletePaymentProofSuccess(state, action) {
+      state.loading = false;
+    },
+    deletePaymentProofFailed(state, action) {
+      state.loading = false;
+    },
 
     //reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
@@ -141,6 +151,26 @@ export const updatePaymentProof = (id, data) => async (dispatch) => {
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.updatePaymentProofFailed());
+    toast.error(error.response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  }
+};
+
+export const deletePaymentProof = (id) => async (dispatch) => {
+  dispatch(superAdminSlice.actions.deletePaymentProofRequest());
+  try {
+    const response = axios.delete(
+      `http://localhost:3000/api/v1/superAdmins/deletePaymentProof/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(superAdminSlice.actions.deletePaymentProofSuccess());
+    dispatch(getAllPaymentProofs());
+    toast.success(response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(superAdminSlice.actions.deletePaymentProofFailed());
     toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   }
