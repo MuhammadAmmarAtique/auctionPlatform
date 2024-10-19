@@ -101,7 +101,7 @@ const superAdminSlice = createSlice({
 export const deleteAuctionItem = (id) => async (dispatch) => {
   dispatch(superAdminSlice.actions.deleteAuctionItemRequest());
   try {
-    const response = axios.delete(
+    const response = await axios.delete(
       `http://localhost:3000/api/v1/superAdmins/deleteAuctionItem/${id}`,
       {
         withCredentials: true,
@@ -122,7 +122,7 @@ export const deleteAuctionItem = (id) => async (dispatch) => {
 export const getAllPaymentProofs = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.getAllPaymentProofsRequest());
   try {
-    const response = axios.get(
+    const response = await axios.get(
       `http://localhost:3000/api/v1/superAdmins/getAllPaymentProofs`,
       {
         withCredentials: true,
@@ -143,7 +143,7 @@ export const getAllPaymentProofs = () => async (dispatch) => {
 export const getPaymentProofDetail = (id) => async (dispatch) => {
   dispatch(superAdminSlice.actions.getPaymentProofDetailRequest());
   try {
-    const response = axios.get(
+    const response = await axios.get(
       `http://localhost:3000/api/v1/superAdmins/getPaymentProofDetail/${id}`,
       {
         withCredentials: true,
@@ -164,7 +164,7 @@ export const getPaymentProofDetail = (id) => async (dispatch) => {
 export const updatePaymentProof = (id, data) => async (dispatch) => {
   dispatch(superAdminSlice.actions.updatePaymentProofRequest());
   try {
-    const response = axios.put(
+    const response = await axios.put(
       `http://localhost:3000/api/v1/superAdmins/updatePaymentProof/${id}`,
       data,
       {
@@ -185,7 +185,7 @@ export const updatePaymentProof = (id, data) => async (dispatch) => {
 export const deletePaymentProof = (id) => async (dispatch) => {
   dispatch(superAdminSlice.actions.deletePaymentProofRequest());
   try {
-    const response = axios.delete(
+    const response = await axios.delete(
       `http://localhost:3000/api/v1/superAdmins/deletePaymentProof/${id}`,
       {
         withCredentials: true,
@@ -205,7 +205,7 @@ export const deletePaymentProof = (id) => async (dispatch) => {
 export const getRegisteredUserCountByMonth = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.getRegisteredUserCountByMonthRequest());
   try {
-    const response = axios.get(
+    const response = await axios.get(
       `http://localhost:3000/api/v1/superAdmins/getRegisteredUserCountByMonth`,
       {
         withCredentials: true,
@@ -228,7 +228,7 @@ export const getRegisteredUserCountByMonth = () => async (dispatch) => {
 export const getMonthlyRevenue = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.getMonthlyRevenueRequest());
   try {
-    const response = axios.get(
+    const response = await axios.get(
       `http://localhost:3000/api/v1/superAdmins/getMonthlyRevenue`,
       {
         withCredentials: true,
