@@ -132,12 +132,11 @@ export const getAllPaymentProofs = () => async (dispatch) => {
     dispatch(
       superAdminSlice.actions.getAllPaymentProofsSuccess(response.data.data)
     );
-    toast.success(response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.getAllPaymentProofsFailed());
-    toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
+    console.log(error.response.data.message);
   }
 };
 
