@@ -137,7 +137,7 @@ const deletePaymentProof = asyncHandler(async (req, res) => {
 
 const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
   const allUsers = await User.aggregate([
-    // 1) it will group document who has same role & same month and year of createion
+    // 1) it will group document who has same role & same month and year of creation
     {
       $group: {
         _id: {
@@ -165,6 +165,10 @@ const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
       },
     },
   ]);
+
+  if (allUsers.length === 0) {
+    throw new ApiError(400, "No users are registered in any month")
+  }
 
   // 4) separating bidders and auctioneers
   const bidders = allUsers.filter((user) => user.role === "Bidder");
