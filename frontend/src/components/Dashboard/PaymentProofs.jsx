@@ -7,11 +7,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const PaymentProofs = () => {
+export const PaymentProofs = () => {
   const { allPaymentProofs, paymentProofDetail } = useSelector(
     (state) => state.superAdmin
   );
-  const [openDrawer, setOpenDrawer] = useState(false);
   const dispatch = useDispatch();
 
   const handlePaymentProofDelete = (id) => {
@@ -28,6 +27,8 @@ const PaymentProofs = () => {
     }
   }, [paymentProofDetail]);
 
+  // For Drawer
+  const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
       <div className="overflow-x-auto">
@@ -75,8 +76,6 @@ const PaymentProofs = () => {
     </>
   );
 };
-
-export default PaymentProofs;
 
 export const Drawer = ({ setOpenDrawer, openDrawer }) => {
   const { paymentProofDetail, loading } = useSelector(

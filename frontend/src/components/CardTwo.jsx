@@ -73,6 +73,7 @@ export const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) 
     dispatch(deleteAuctionItem(id));
   };
 
+  // For Drawer
   const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
