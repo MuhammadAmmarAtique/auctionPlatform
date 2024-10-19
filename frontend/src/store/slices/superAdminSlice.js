@@ -10,6 +10,7 @@ const superAdminSlice = createSlice({
     paymentProofDetail: {},
     biddersRegisteredInEachMonth: [],
     auctioneersRegisteredInEachMonth: [],
+    monthlyRevenue:[]
   },
   reducers: {
     // #1 Delete Auction item reducers
