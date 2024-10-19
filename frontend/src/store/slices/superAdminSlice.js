@@ -76,6 +76,17 @@ const superAdminSlice = createSlice({
     getRegisteredUserCountByMonthFailed(state, action) {
       state.loading = false;
     },
+    // #7 Get Monthly Revenue reducers
+    getMonthlyRevenueRequest(state, action) {
+      state.loading = true;
+    },
+    getMonthlyRevenueSuccess(state, action) {
+      state.loading = false;
+      state.monthlyRevenue = action.payload;
+    },
+    getMonthlyRevenueFailed(state, action) {
+      state.loading = false;
+    },
 
     //reducer for clearing errors/ Reset slice
     clearAllErrors(state, action) {
@@ -213,4 +224,24 @@ export const getRegisteredUserCountByMonth = () => async (dispatch) => {
   }
 };
 
+export const getMonthlyRevenue = () => async (dispatch) => {
+  dispatch(superAdminSlice.actions.getMonthlyRevenueRequest());
+  try {
+    const response = axios.get(
+      `http://localhost:3000/api/v1/superAdmins/getMonthlyRevenue`,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(
+      superAdminSlice.actions.getMonthlyRevenueSuccess(response.data.data)
+    );
+    toast.success(response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(superAdminSlice.actions.getMonthlyRevenueFailed());
+    toast.error(error.response.data.message);
+    dispatch(superAdminSlice.actions.clearAllErrors());
+  }
+};
 export default superAdminSlice.reducer;
