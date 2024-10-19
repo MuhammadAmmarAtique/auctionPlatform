@@ -37,7 +37,7 @@ const AuctionItemDelete = () => {
                     <td className="py-2 px-4">{element.title}</td>
                     <td className="py-2 px-4 flex space-x-2">
                       <Link
-                        to={`/auction/details/${element._id}`}
+                        to={`/auction/item/${element._id}`}
                         className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-700 transition-all duration-300"
                       >
                         View
