@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { getUserAuctionItems, getAllAuctionItems } from "./auctionSlice";
+import axios from "axios";
 
 const superAdminSlice = createSlice({
   name: "superAdmin",
@@ -83,7 +84,7 @@ const superAdminSlice = createSlice({
     },
     getMonthlyRevenueSuccess(state, action) {
       state.loading = false;
-      state.monthlyRevenue = action.payload;
+      state.monthlyRevenue = action.payload.monthlyRevenue;
     },
     getMonthlyRevenueFailed(state, action) {
       state.loading = false;
@@ -237,12 +238,11 @@ export const getMonthlyRevenue = () => async (dispatch) => {
     dispatch(
       superAdminSlice.actions.getMonthlyRevenueSuccess(response.data.data)
     );
-    toast.success(response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.getMonthlyRevenueFailed());
-    toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
+    console.log(error.response.data.message);
   }
 };
 export default superAdminSlice.reducer;
