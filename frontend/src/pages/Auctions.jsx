@@ -18,8 +18,9 @@ const Auctions = () => {
               Auctions
             </h1>
             <p className="text-xl mb-8">
-              Discover and bid on a variety of exclusive items, where every
-              Auction is a chance to win big.
+              {allAuctions.length > 0 ? 
+              "Discover and bid on a variety of exclusive items, where everyAuction is a chance to win big." :
+               "No Auctions listed till now!"}
             </p>
             <div className="flex flex-wrap gap-6">
               {allAuctions.map((element) => (
