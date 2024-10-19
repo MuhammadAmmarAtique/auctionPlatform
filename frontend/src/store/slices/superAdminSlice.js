@@ -217,12 +217,11 @@ export const getRegisteredUserCountByMonth = () => async (dispatch) => {
         response.data.data
       )
     );
-    toast.success(response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.getRegisteredUserCountByMonthFailed());
-    toast.error(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
+    console.log(error.response.data.message);
   }
 };
 
