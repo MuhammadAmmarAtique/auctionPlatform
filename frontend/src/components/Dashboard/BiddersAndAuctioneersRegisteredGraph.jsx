@@ -24,7 +24,7 @@ ChartJS.register(
   PointElement
 );
 
-const BiddersAuctioneersGraph = () => {
+const BiddersAndAuctioneersRegisteredGraph = () => {
   const { auctioneersRegisteredInEachMonth, biddersRegisteredInEachMonth } = useSelector(
     (state) => state.superAdmin
   );
@@ -82,4 +82,4 @@ const BiddersAuctioneersGraph = () => {
   return <Line data={data} options={options} />;
 };
 
-export default BiddersAuctioneersGraph;
+export default BiddersAndAuctioneersRegisteredGraph;

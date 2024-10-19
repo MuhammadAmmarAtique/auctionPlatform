@@ -24,7 +24,7 @@ ChartJS.register(
   PointElement
 );
 
-const PaymentGraph = () => {
+const RevenueGraph = () => {
   const { monthlyRevenue } = useSelector((state) => state.superAdmin);
 
   const data = {
@@ -74,4 +74,4 @@ const PaymentGraph = () => {
   return <Bar data={data} options={options} />;
 };
 
-export default PaymentGraph;
+export default RevenueGraph;
