@@ -187,8 +187,7 @@ const getRegisteredUserCountByMonth = asyncHandler(async (req, res) => {
       200,
       "Successfully fetched Users data and Transformed them into a Array showing in which month how many users are registered!",
       {
-        "Bidders Registered In each Month:::": biddersRegisteredInEachMonth,
-        "Auctioneers Registered In each Month:::":
+         biddersRegisteredInEachMonth,
           auctioneersRegisteredInEachMonth,
       }
     )
