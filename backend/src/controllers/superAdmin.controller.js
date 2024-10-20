@@ -25,7 +25,7 @@ const getAllPaymentProofs = asyncHandler(async (req, res) => {
   const AllPaymentProofs = await CommissionProof.find();
 
   if (AllPaymentProofs.length === 0) {
-    throw new ApiError(200, "No payment proofs exist or found in database");
+    throw new ApiError(400, "No payment proofs exist or found in database");
   }
 
   res
