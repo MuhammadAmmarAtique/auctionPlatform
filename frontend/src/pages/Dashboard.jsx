@@ -53,13 +53,13 @@ const Dashboard = () => {
               </div>
               <div>
                 <h3 className="text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl">
-                  Users
+                Monthly User Registrations
                 </h3>
                 <BiddersAndAuctioneersRegisteredGraph />
               </div>
               <div>
                 <h3 className="text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl">
-                  Payment Proofs
+                  View, Update and Delete Payment Proofs
                 </h3>
                 <PaymentProofs />
               </div>
