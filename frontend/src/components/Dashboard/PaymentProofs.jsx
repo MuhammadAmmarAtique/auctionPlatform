@@ -93,12 +93,19 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
   return (
     <>
       <section
-      className={`fixed ${openDrawer && paymentProofDetail.userId ? "bottom-0 opacity-100" : "-bottom-full opacity-0"} left-0 w-full transition-all duration-300 min-h-screen bg-[#00000087] flex items-end`}
-
+        className={`fixed ${
+          openDrawer && paymentProofDetail.userId
+            ? "bottom-0 opacity-100"
+            : "-bottom-full opacity-0"
+        } left-0 w-full transition-all duration-300 min-h-screen flex items-end`}
       >
-        <div className="bg-white h-fit transition-all duration-300 w-full">
-          <div className="w-full px-5 py-8 sm:max-w-[640px] sm:m-auto">
-            <h3 className="text-[#D6482B]  text-3xl font-semibold text-center mb-1">
+        <div className="bg-white h-fit transition-all duration-300 w-full overflow-y-auto max-h-[100vh]">
+          {" "}
+          {/* Added max-height */}
+          <div className="w-full px-5 py-8 sm:max-w-[640px] sm:m-auto flex flex-col">
+            {" "}
+            {/* Added flex-col here */}
+            <h3 className="text-[#D6482B] text-3xl font-semibold text-center mb-1">
               Update Payment Proof
             </h3>
             <p className="text-stone-600">
@@ -106,13 +113,13 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
             </p>
             <form className="flex flex-col gap-5 my-5">
               <div className="flex flex-col gap-3">
-                <label className="text-[16px] text-stone-600 ">User ID</label>
+                <label className="text-[16px] text-stone-600">User ID</label>
                 <input
                   type="text"
                   value={paymentProofDetail.userId || ""}
                   disabled
                   onChange={(e) => e.target.value}
-                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600  rounded-md focus:outline-none  text-stone-600"
+                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600 rounded-md focus:outline-none text-stone-600"
                 />
               </div>
               <div className="flex flex-col gap-3">
@@ -121,7 +128,7 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
                   type="number"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600  rounded-md focus:outline-none"
+                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600 rounded-md focus:outline-none"
                 />
               </div>
               <div className="flex flex-col gap-3">
@@ -129,7 +136,7 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600  rounded-md focus:outline-none"
+                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600 rounded-md focus:outline-none"
                 >
                   <option value="Pending">Pending</option>
                   <option value="Approved">Approved</option>
@@ -144,7 +151,7 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
                   value={paymentProofDetail.comment || ""}
                   onChange={(e) => e.target.value}
                   disabled
-                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600  rounded-md focus:outline-none text-stone-600"
+                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600 rounded-md focus:outline-none text-stone-600"
                 />
               </div>
               <div>
