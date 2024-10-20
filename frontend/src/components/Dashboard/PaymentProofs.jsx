@@ -21,14 +21,15 @@ export const PaymentProofs = () => {
     dispatch(getPaymentProofDetail(id));
   };
 
+  // For Drawer
+  const [openDrawer, setOpenDrawer] = useState(false);
+
   useEffect(() => {
     if (paymentProofDetail && Object.keys(paymentProofDetail).length > 0) {
       setOpenDrawer(true);
     }
   }, [paymentProofDetail]);
 
-  // For Drawer
-  const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
       <div className="overflow-x-auto">
@@ -52,7 +53,7 @@ export const PaymentProofs = () => {
                         className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-700 transition-all duration-300"
                         onClick={() => handleFetchPaymentDetail(element._id)}
                       >
-                        Update
+                        View
                       </button>
                       <button
                         className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 transition-all duration-300"
@@ -92,9 +93,8 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
   return (
     <>
       <section
-        className={`fixed ${
-          openDrawer && paymentProofDetail.userId ? "bottom-0" : "-bottom-full"
-        }  left-0 w-full transition-all duration-300 h-full bg-[#00000087] flex items-end`}
+      className={`fixed ${openDrawer && paymentProofDetail.userId ? "bottom-0 opacity-100" : "-bottom-full opacity-0"} left-0 w-full transition-all duration-300 min-h-screen bg-[#00000087] flex items-end`}
+
       >
         <div className="bg-white h-fit transition-all duration-300 w-full">
           <div className="w-full px-5 py-8 sm:max-w-[640px] sm:m-auto">
