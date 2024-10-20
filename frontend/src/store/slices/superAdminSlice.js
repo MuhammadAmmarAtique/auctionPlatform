@@ -152,11 +152,10 @@ export const getPaymentProofDetail = (id) => async (dispatch) => {
     dispatch(
       superAdminSlice.actions.getPaymentProofDetailSuccess(response.data.data)
     );
-    toast.success(response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.getPaymentProofDetailFailed());
-    toast.error(error.response.data.message);
+    console.log(error.response.data.message);
     dispatch(superAdminSlice.actions.clearAllErrors());
   }
 };
