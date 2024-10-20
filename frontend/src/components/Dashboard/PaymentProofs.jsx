@@ -38,6 +38,7 @@ export const PaymentProofs = () => {
             <tr>
               <th className="w-1/3 py-2">User ID</th>
               <th className="w-1/3 py-2">Status</th>
+              <th className="w-1/3 py-2">Amount</th>
               <th className="w-1/3 py-2">Actions</th>
             </tr>
           </thead>
@@ -48,6 +49,7 @@ export const PaymentProofs = () => {
                   <tr key={index}>
                     <td className="py-2 px-4 text-center">{element.userId}</td>
                     <td className="py-2 px-4 text-center">{element.status}</td>
+                    <td className="py-2 px-4 text-center">{element.amount}</td>
                     <td className="flex items-center py-4 justify-center gap-3">
                       <button
                         className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-700 transition-all duration-300"
@@ -107,20 +109,33 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
             <h3 className="text-[#D6482B] text-3xl font-semibold text-center mb-1">
               Update Payment Proof
             </h3>
-            <p className="text-stone-600">
-              You can update payment status and amount.
+            <p className="text-stone-600 text-xl text-center">
+              You can update Amount and Payment Status.
             </p>
             <form className="flex flex-col gap-5 my-5">
               <div className="flex flex-col gap-3">
-                <label className="text-[16px] text-stone-600">User ID</label>
+                <label className="text-[16px] text-gray-500">Auctioneer ID</label>
                 <input
                   type="text"
                   value={paymentProofDetail.userId || ""}
                   disabled
                   onChange={(e) => e.target.value}
-                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600 rounded-md focus:outline-none text-stone-600"
+                  className="text-xl px-1 py-2 bg-gray-200 border-[1px] border-gray-400 rounded-md focus:outline-none text-gray-500 cursor-not-allowed"
                 />
               </div>
+              <div className="flex flex-col gap-3">
+                <label className="text-[16px] text-gray-500">
+                  Auctioneer Comments
+                </label>
+                <textarea
+                  rows={5}
+                  value={paymentProofDetail.comment || ""}
+                  onChange={(e) => e.target.value}
+                  disabled
+                  className="text-xl px-1 py-2 bg-gray-200 border-[1px] border-gray-400 rounded-md focus:outline-none text-gray-500 cursor-not-allowed"
+                />
+              </div>
+
               <div className="flex flex-col gap-3">
                 <label className="text-[16px] text-stone-600">Amount</label>
                 <input
@@ -143,16 +158,7 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
                   <option value="Settled">Settled</option>
                 </select>
               </div>
-              <div className="flex flex-col gap-3">
-                <label className="text-[16px] text-stone-600">Comment</label>
-                <textarea
-                  rows={5}
-                  value={paymentProofDetail.comment || ""}
-                  onChange={(e) => e.target.value}
-                  disabled
-                  className="text-xl px-1 py-2 bg-transparent border-[1px] border-stone-600 rounded-md focus:outline-none text-stone-600"
-                />
-              </div>
+
               <div>
                 <Link
                   to={paymentProofDetail.imageProof?.url || ""}
@@ -176,8 +182,12 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
                   type="button"
                   className="bg-yellow-500 flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-yellow-700"
                   onClick={() => {
-                    setOpenDrawer(false); 
-                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });                  }}
+                    setOpenDrawer(false);
+                    window.scrollTo({
+                      top: document.body.scrollHeight,
+                      behavior: "instant",
+                    });
+                  }}
                 >
                   Cancel
                 </button>
