@@ -87,7 +87,10 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
 
   const dispatch = useDispatch();
   const handlePaymentProofUpdate = () => {
-    dispatch(updatePaymentProof(paymentProofDetail._id, status, amount));
+    const formData = new FormData;
+    formData.append("amount",amount)
+    formData.append("status",status)
+    dispatch(updatePaymentProof(paymentProofDetail._id, formData));
   };
 
   return (
@@ -156,7 +159,7 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
               </div>
               <div>
                 <Link
-                  to={paymentProofDetail.proof?.url || ""}
+                  to={paymentProofDetail.imageProof?.url || ""}
                   className="bg-[#D6482B] flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-[#b8381e]"
                   target="_blank"
                 >
