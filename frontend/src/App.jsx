@@ -33,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      <SideDrawer /> {/* it will serve as navbar & will always appear */}
+      <SideDrawer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<Signup />} />
@@ -52,7 +52,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} /> 
       </Routes>
       <ToastContainer position="top-right" />{" "}
-      {/* it will shows messages & will always appear */}
     </Router>
   );
 }

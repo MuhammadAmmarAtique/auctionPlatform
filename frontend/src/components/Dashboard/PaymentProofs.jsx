@@ -87,9 +87,9 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
 
   const dispatch = useDispatch();
   const handlePaymentProofUpdate = () => {
-    const formData = new FormData;
-    formData.append("amount",amount)
-    formData.append("status",status)
+    const formData = new FormData();
+    formData.append("amount", amount);
+    formData.append("status", status);
     dispatch(updatePaymentProof(paymentProofDetail._id, formData));
   };
 
@@ -103,11 +103,7 @@ export const Drawer = ({ setOpenDrawer, openDrawer }) => {
         } left-0 w-full transition-all duration-300 min-h-screen flex items-end`}
       >
         <div className="bg-white h-fit transition-all duration-300 w-full overflow-y-auto max-h-[100vh]">
-          {" "}
-          {/* Added max-height */}
           <div className="w-full px-5 py-8 sm:max-w-[640px] sm:m-auto flex flex-col">
-            {" "}
-            {/* Added flex-col here */}
             <h3 className="text-[#D6482B] text-3xl font-semibold text-center mb-1">
               Update Payment Proof
             </h3>
