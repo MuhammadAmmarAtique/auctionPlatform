@@ -94,7 +94,10 @@ const superAdminSlice = createSlice({
     clearAllErrors(state, action) {
       state.loading = false;
       state.allPaymentProofs = state.allPaymentProofs;
-      state.paymentProofDetail = state.paymentProofDetail;
+      state.paymentProofDetail = {}; // Clear the previous data to ensure the PaymentProof component's Drawer is filled with new data each time the "View" button is clicked.
+      state.biddersRegisteredInEachMonth = state.biddersRegisteredInEachMonth;
+      state.auctioneersRegisteredInEachMonth = state.auctioneersRegisteredInEachMonth;
+      state.monthlyRevenue = state.monthlyRevenue;
     },
   },
 });
@@ -152,7 +155,7 @@ export const getPaymentProofDetail = (id) => async (dispatch) => {
     dispatch(
       superAdminSlice.actions.getPaymentProofDetailSuccess(response.data.data)
     );
-    dispatch(superAdminSlice.actions.clearAllErrors());
+    // dispatch(superAdminSlice.actions.clearAllErrors()); // Dont use it as it will clear paymentProofDetail object filled by getPaymentProofDetailSuccess
   } catch (error) {
     dispatch(superAdminSlice.actions.getPaymentProofDetailFailed());
     console.log(error.response.data.message);
@@ -242,4 +245,8 @@ export const getMonthlyRevenue = () => async (dispatch) => {
     console.log(error.response.data.message);
   }
 };
+
+export const clearAllSuperAdminSliceErrors = () => async (dispatch) => {
+  dispatch(superAdminSlice.actions.clearAllErrors())
+}
 export default superAdminSlice.reducer;

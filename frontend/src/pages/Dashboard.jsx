@@ -2,6 +2,7 @@ import {
   getAllPaymentProofs,
   getRegisteredUserCountByMonth,
   getMonthlyRevenue,
+  clearAllSuperAdminSliceErrors
 } from "../store/slices/superAdminSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,7 @@ const Dashboard = () => {
     dispatch(getMonthlyRevenue());
     dispatch(getRegisteredUserCountByMonth());
     dispatch(getAllPaymentProofs());
+    dispatch(clearAllSuperAdminSliceErrors());
   }, []);
 
   const { user, isAuthenticated } = useSelector((state) => state.user);
