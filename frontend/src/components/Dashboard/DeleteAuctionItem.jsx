@@ -17,9 +17,10 @@ const DeleteAuctionItem = () => {
         <table className="min-w-full bg-white border-gray-300">
           <thead className="bg-gray-800 text-white">
             <tr>
-              <th className="py-2 px-4 text-left">Image</th>
-              <th className="py-2 px-4 text-left">Title</th>
-              <th className="py-2 px-4 text-left">Actions</th>
+              <th className="w-1/4 py-2 text-center">Image</th>
+              <th className="w-1/4 py-2 text-center">Title</th>
+              <th className="w-1/4 py-2 text-center">Highest Bid</th>
+              <th className="w-1/4 py-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody className="text-gray-700">
@@ -27,15 +28,18 @@ const DeleteAuctionItem = () => {
               allAuctions.map((element) => {
                 return (
                   <tr key={element._id}>
-                    <td className="py-2 px-4">
+                    <td className="py-2 px-4 flex justify-center items-center">
                       <img
                         src={element.image?.url}
                         alt={element.title}
                         className="h-12 w-12 object-cover rounded"
                       />
                     </td>
-                    <td className="py-2 px-4">{element.title}</td>
-                    <td className="py-2 px-4 flex space-x-2">
+                    <td className="py-2 px-4 text-center">{element.title}</td>
+                    <td className="py-2 px-4 text-center">
+                      {element.currentBid}
+                    </td>
+                    <td className="py-2 px-4 text-center flex justify-center space-x-2">
                       <Link
                         to={`/auction/item/${element._id}`}
                         className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-700 transition-all duration-300"
@@ -53,8 +57,8 @@ const DeleteAuctionItem = () => {
                 );
               })
             ) : (
-              <tr className="text-left text-xl text-sky-600 py-3">
-                <td>No Auctions found.</td>
+              <tr className="text-center text-xl text-sky-600 py-3">
+                <td colSpan="4">No Auctions found.</td>
               </tr>
             )}
           </tbody>
