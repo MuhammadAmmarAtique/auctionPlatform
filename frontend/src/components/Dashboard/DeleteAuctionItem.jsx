@@ -3,7 +3,7 @@ import { deleteAuctionItem } from "../../store/slices/auctionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const AuctionItemDelete = () => {
+const DeleteAuctionItem = () => {
   const { allAuctions } = useSelector((state) => state.auction);
   const dispatch = useDispatch();
 
@@ -64,4 +64,4 @@ const AuctionItemDelete = () => {
   );
 };
 
-export default AuctionItemDelete;
+export default DeleteAuctionItem;

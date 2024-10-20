@@ -6,7 +6,7 @@ import {
 } from "../store/slices/superAdminSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AuctionItemDelete from "../components/Dashboard/AuctionItemDelete";
+import DeleteAuctionItem from "../components/Dashboard/DeleteAuctionItem";
 import BiddersAndAuctioneersRegisteredGraph from "../components/Dashboard/BiddersAndAuctioneersRegisteredGraph";
 import RevenueGraph from "../components/Dashboard/RevenueGraph";
 import { PaymentProofs } from "../components/Dashboard/PaymentProofs";
@@ -67,7 +67,7 @@ const Dashboard = () => {
                 <h3 className="text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl">
                   Delete Items From Auction
                 </h3>
-                <AuctionItemDelete />
+                <DeleteAuctionItem />
               </div>
             </div>
           </div>
