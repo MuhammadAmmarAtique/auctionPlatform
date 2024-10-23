@@ -10,6 +10,7 @@ import AuctionItem from "./AuctionItem";
 import CreateAuction from "./CreateAuction";
 import ViewMyAuctions from "./ViewMyAuctions";
 import Dashboard from "./Dashboard";
+import Contact from "./Contact";
 
 export {
   Home,
@@ -23,5 +24,6 @@ export {
   AuctionItem,
   CreateAuction,
   ViewMyAuctions,
-  Dashboard
+  Dashboard,
+  Contact
 };

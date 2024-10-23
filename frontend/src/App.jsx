@@ -19,7 +19,8 @@ import {
   AuctionItem,
   CreateAuction,
   ViewMyAuctions,
-  Dashboard
+  Dashboard,
+  Contact
 } from "./pages/index";
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/create-auction" element={<CreateAuction />} />
         <Route path="/view-my-auctions" element={<ViewMyAuctions />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/contact" element={<Contact />} /> 
       </Routes>
       <ToastContainer position="top-right" />{" "}
     </Router>
