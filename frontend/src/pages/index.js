@@ -10,7 +10,8 @@ import AuctionItem from "./AuctionItem";
 import CreateAuction from "./CreateAuction";
 import ViewMyAuctions from "./ViewMyAuctions";
 import Dashboard from "./Dashboard";
-import Contact from "./Contact";
+import Contact from "./Contact"; 
+import UserProfile from "./UserProfile"; 
 
 export {
   Home,
@@ -25,5 +26,6 @@ export {
   CreateAuction,
   ViewMyAuctions,
   Dashboard,
-  Contact
+  Contact,
+  UserProfile
 };
