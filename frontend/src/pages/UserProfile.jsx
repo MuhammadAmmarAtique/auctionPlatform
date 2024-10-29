@@ -22,7 +22,7 @@ const UserProfile = () => {
               <img
                 src={user.profileImage?.url}
                 alt="/imageHolder.jpg"
-                className="w-36 h-36 rounded-full"
+                className="w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-55 lg:h-55 rounded-full object-cover"
               />
 
               <div className="mb-6 w-full">
