@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Spinner from "../components/Spinner";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 const UserProfile = () => {
   const { user, isAuthenticated, loading } = useSelector((state) => state.user);
@@ -11,6 +13,36 @@ const UserProfile = () => {
       navigateTo("/");
     }
   }, [isAuthenticated]);
+
+  // Stripe integration
+  const makePayment = async () => {
+  
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_Publishable_key);
+    const response = await axios.post(`http://localhost:3000/api/v1/stripe/create-checkout-session`, {
+      Auctioneer_Unpaid_Comission: user.unpaidCommission,
+    },  {
+      withCredentials: true,
+      headers: { "Content-Type": "application/json" },
+    })
+
+    // when customer will click on "Pay Now" Button a request will be gone to backend & a session will be created with
+    // stripe service also from response from backend we will get session's idon basis of that session id customer will be
+    //  redirected to stripe checkout page to safely collect payment after collecting payment we will redirect customer back 
+    // to our website.
+   
+ 
+    const result = stripe.redirectToCheckout({
+      sessionId: response.data.id,
+    });
+
+    console.log("result:::" , result);
+    
+
+    if (result.error) {
+      console.log("Error during checkout page in Stripe :::", result.error);
+    }
+  };
+
   return (
     <>
       <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-start">
@@ -185,6 +217,15 @@ const UserProfile = () => {
                           className="w-ful mt-1 p-2 border-gray-300 rounded-md focus:outline-none"
                           disabled
                         />
+                        {user.unpaidCommission > 0 ? (
+                          <button
+                            className="bg-[#D6482B] font-semibold hover:bg-[#b8381e] text-xl py-1 px-4 rounded-md text-white"
+                            type="button"
+                            onClick={makePayment}
+                          >
+                            Pay Now{" "}
+                          </button>
+                        ) : null}
                       </div>
                     </>
                   )}
