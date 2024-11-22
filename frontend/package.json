@@ -12,6 +12,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "@stripe/stripe-js": "^5.2.0",
     "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "class-variance-authority": "^0.7.0",
