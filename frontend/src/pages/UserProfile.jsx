@@ -8,11 +8,13 @@ import axios from "axios";
 const UserProfile = () => {
   const { user, isAuthenticated, loading } = useSelector((state) => state.user);
   const navigateTo = useNavigate();
+
+  // Redirect only when loading is false and the user is not authenticated
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!loading && !isAuthenticated) {
       navigateTo("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, loading, navigateTo]);
 
   // Stripe integration
   const makePayment = async () => {
@@ -46,13 +48,19 @@ const UserProfile = () => {
     }
   };
 
+   // Showing a loading spinner while checking if the user is authenticated
+   if (loading) {
+    return <Spinner />;
+  }
+
+ // If the user is not logged in, stop rendering this page
+   if (!isAuthenticated) {
+    navigateTo("/");
+   }
+
   return (
     <>
       <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-start">
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
             <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
               <img
                 src={user.profileImage?.url}
@@ -259,8 +267,6 @@ const UserProfile = () => {
                 </div>
               </div>
             </div>
-          </>
-        )}
       </section>
     </>
   );

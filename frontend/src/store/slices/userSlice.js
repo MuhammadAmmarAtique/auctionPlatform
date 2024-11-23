@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    loading: false,
+    loading: true,
     isAuthenticated: false,
     user: {},
     leaderboard: []
