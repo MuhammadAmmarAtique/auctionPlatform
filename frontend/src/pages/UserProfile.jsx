@@ -16,27 +16,30 @@ const UserProfile = () => {
 
   // Stripe integration
   const makePayment = async () => {
-  
-    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_Publishable_key);
-    const response = await axios.post(`http://localhost:3000/api/v1/stripe/create-checkout-session`, {
-      Auctioneer_Unpaid_Comission: user.unpaidCommission,
-    },  {
-      withCredentials: true,
-      headers: { "Content-Type": "application/json" },
-    })
+    const stripe = await loadStripe(
+      import.meta.env.VITE_STRIPE_Publishable_key
+    );
+    const response = await axios.post(
+      `http://localhost:3000/api/v1/stripe/create-checkout-session`,
+      {
+        Auctioneer_Unpaid_Comission: user.unpaidCommission,
+      },
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     // when customer will click on "Pay Now" Button a request will be gone to backend & a session will be created with
-    // stripe service also from response from backend we will get session's idon basis of that session id customer will be
-    //  redirected to stripe checkout page to safely collect payment after collecting payment we will redirect customer back 
+    // stripe service also from  backend response we will get session's id basis of that session id customer will be
+    //  redirected to stripe checkout page to safely collect payment after collecting payment we will redirect customer back
     // to our website.
-   
- 
+
     const result = stripe.redirectToCheckout({
       sessionId: response.data.id,
     });
 
-    console.log("result:::" , result);
-    
+    console.log("result:::", result);
 
     if (result.error) {
       console.log("Error during checkout page in Stripe :::", result.error);
@@ -201,9 +204,7 @@ const UserProfile = () => {
               )}
 
               <div className="mb-6 w-full">
-                <h3 className="text-xl font-semibold mb-4">
-                  Other Details
-                </h3>
+                <h3 className="text-xl font-semibold mb-4">Other Details</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {user.role === "Auctioneer" && (
                     <>
