@@ -41,8 +41,6 @@ const UserProfile = () => {
       sessionId: response.data.id,
     });
 
-    console.log("result:::", result);
-
     if (result.error) {
       console.log("Error during checkout page in Stripe :::", result.error);
     }
