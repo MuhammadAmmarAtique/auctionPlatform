@@ -11,6 +11,10 @@ app.use(cors({
    origin: process.env.CORS_ORIGIN, // Frontend origin
    credentials: true, // Allow credentials (cookies, headers)
    }));
+
+// Use raw body parsing for Stripe webhooks (It will handle the incoming request body as raw binary data)
+app.use('/api/v1/stripe/webhook', express.raw({ type: 'application/json' }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
