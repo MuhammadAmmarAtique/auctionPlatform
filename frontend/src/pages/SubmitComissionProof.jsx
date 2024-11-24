@@ -35,17 +35,48 @@ const SubmitComissionProof = () => {
   return (
     <>
       <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-start">
-        <div className=" mb-5">
-          <h1
-            className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-          >
-            Upload Payment Proof
-          </h1>
-          <p className="text-xl">
-            Please upload a valid payment proof for verification.
-          </p>
-        </div>
+      <div className="mb-5">
+  <h1
+    className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
+  >
+    Payment Methods
+  </h1>
+  <p className="text-xl">
+    Please pay your unpaid commission to the Super Admin using the following payment methods.
+  </p>
+
+  <div className="mt-5 space-y-6">
+    {/* Bank Transfer Details */}
+    <div className="border p-4 rounded-md shadow-lg">
+      <h2 className="text-xl font-bold text-[#d6482b] mb-2">Bank Transfer</h2>
+      <p className="text-lg"><strong>Bank Account Number:</strong> 1234567890123456</p>
+      <p className="text-lg"><strong>Bank Account Name:</strong> John Doe</p>
+      <p className="text-lg"><strong>Bank Name:</strong> National Bank of XYZ</p>
+    </div>
+
+    {/* Easypaisa Details */}
+    <div className="border p-4 rounded-md shadow-lg">
+      <h2 className="text-xl font-bold text-[#d6482b] mb-2">Easypaisa</h2>
+      <p className="text-lg"><strong>Easypaisa Account Number:</strong> 03001234567</p>
+    </div>
+
+    {/* PayPal Details */}
+    <div className="border p-4 rounded-md shadow-lg">
+      <h2 className="text-xl font-bold text-[#d6482b] mb-2">PayPal</h2>
+      <p className="text-lg"><strong>PayPal Email:</strong> johndoe@example.com</p>
+    </div>
+  </div>
+</div>
+<h1
+    className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl mt-5`}
+  >
+    Submit Comission Proof
+  </h1>
+  <p className="text-xl mb-5">
+    Once the payment is made, kindly upload the payment proof for verification.
+  </p>
         <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
+
           <form
             className="flex flex-col gap-5 w-full"
             onSubmit={handleSubmitComissionProof}
