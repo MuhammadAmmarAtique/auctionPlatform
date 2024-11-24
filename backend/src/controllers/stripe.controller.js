@@ -3,11 +3,11 @@ import { User } from "../models/user.model.js";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.SECRET_KEY);
 
-// It is designed to handle requests from the frontend to set up a checkout payment session using Stripe.
+// This controller is designed to handle requests from the frontend to set up a checkout payment session using Stripe.
 
 export const createCheckoutSession = asyncHandler(async (req, res) => {
   const userUnpaidComission = req.body.Auctioneer_Unpaid_Comission;
-  const userId = req.user._id.toString(); 
+  const userId = req.user._id.toString();
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -31,8 +31,8 @@ export const createCheckoutSession = asyncHandler(async (req, res) => {
   res.json({ id: session.id });
 });
 
-// It Handles incoming requests from Stripe CLI for successful "unpaidCommission" payments by "Auctioneer" 
-// to update the auctioneer's database accordingly.
+// This controller will Handles incoming requests from Stripe CLI for successful "unpaidCommission" payments by 
+// "Auctioneer" to update the auctioneer's database accordingly.
 
 export const stripeWebhook = asyncHandler(async (req, res) => {
   const sig = req.headers["stripe-signature"]; //The Stripe signature to verify the request is genuine or not
@@ -42,7 +42,7 @@ export const stripeWebhook = asyncHandler(async (req, res) => {
     event = stripe.webhooks.constructEvent(
       req.body, // Raw body passed to req.body
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET 
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message);
@@ -65,3 +65,6 @@ export const stripeWebhook = asyncHandler(async (req, res) => {
 
   res.status(200).json({ received: true });
 });
+
+// To get request from stripe upon successfull payment add below line in windows command prommt.
+// stripe listen --forward-to http://localhost:3000/api/v1/stripe/webhook
