@@ -66,5 +66,6 @@ export const stripeWebhook = asyncHandler(async (req, res) => {
   res.status(200).json({ received: true });
 });
 
-// To get request from stripe upon successfull payment add below line in windows command prommt.
+// To get request from stripe upon successfull payment add below line in windows command prompt.
+// Stripe CLI is used for locat host not for Production.
 // stripe listen --forward-to http://localhost:3000/api/v1/stripe/webhook
