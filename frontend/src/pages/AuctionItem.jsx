@@ -25,7 +25,7 @@ const AuctionItem = () => {
     formData.append("amount", amount);
     dispatch(placeBid(id, formData));
     dispatch(getAuctionItemDetails(id));
-    setAmount("")
+    setAmount("");
   };
 
   useEffect(() => {
@@ -102,7 +102,7 @@ const AuctionItem = () => {
                     );
                   })}
             </div>
-            {/* b) Bidds */}
+            {/* b) Bids */}
             <div className="flex-1">
               <header className="bg-stone-200 py-4 text-[24px] font-semibold px-4">
                 BIDS
