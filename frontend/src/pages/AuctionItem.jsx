@@ -6,6 +6,9 @@ import { placeBid } from "../store/slices/bidSlice";
 import Spinner from "../components/Spinner";
 import { FaGreaterThan } from "react-icons/fa";
 import { RiAuctionFill } from "react-icons/ri";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:5000");
 
 const AuctionItem = () => {
   const { id } = useParams();
@@ -19,7 +22,7 @@ const AuctionItem = () => {
   const navigateTo = useNavigate();
 
   const [amount, setAmount] = useState("");
-
+ 
   const handleBid = () => {
     const formData = new FormData();
     formData.append("amount", amount);
