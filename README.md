@@ -1,4 +1,4 @@
-# 🕵️‍♂️ auctionPlatform
+# 🕵️‍♂️ Auction Platform
 
 A full-stack auction platform built with the **MERN stack** (MongoDB, Express.js, React, Node.js) where users can list items for auction, place bids in real time, and handle commissions securely. The platform supports roles like **Auctioneers**, **Bidders**, and **Super Admins**. Payment handling is integrated with **Stripe**, and automation is achieved via cron jobs.
 
@@ -111,7 +111,6 @@ Interactive graphs showing:
    ```bash
    cd backend
    npm install
-   cp .env.sample .env  # Fill in required environment variables
    npm run dev
    ```
 
@@ -119,9 +118,12 @@ Interactive graphs showing:
    ```bash
    cd frontend
    npm install
-   cp .env.sample .env  # Fill in required environment variables
    npm run dev
    ```
+4. **Environment Variables**
+Both backend and frontend folders contain a .env.sample file.
+Rename each to .env.
+Open the .env files and fill in the required environment variables (e.g., MongoDB URI, JWT secret, Stripe keys, etc.).
 
 ---
 
