@@ -53,7 +53,7 @@ auctionPlatform/
 │   ├── tailwind.config.js          # Tailwind CSS config
 │   └── vite.config.js              # Vite config
 │
-├── README.md                       # You're reading it!
+├── readme.md                       # You're reading it!
 └── auctionPlatform.postman_collection.json  # Postman API collection for testing
 ```
 
